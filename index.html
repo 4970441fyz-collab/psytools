@@ -4,162 +4,270 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>psytools — психологическая самопомощь</title>
-<meta name="description" content="Психологические инструменты для самопомощи: карты эмоций и АКТ-упражнения для развития психологической гибкости. Работает самостоятельно, в группе или с психологом.">
+<meta name="description" content="Психологические инструменты для самопомощи: карты эмоций и АКТ-упражнения для развития психологической гибкости.">
 <meta property="og:title" content="psytools — психологическая самопомощь">
 <meta property="og:description" content="Карты эмоций и АКТ-упражнения. Инструменты для проживания эмоций и психологической гибкости.">
-<meta property="og:url" content="https://psytools-vert.vercel.app/">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiMzQzM0ODkiLz4KICA8dGV4dCB4PSIxNiIgeT0iMjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI0VFRURGRSI+cDwvdGV4dD4KPC9zdmc+" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
+:root{
+  --bg:#FAF8F4;
+  --bg2:#F3F0E9;
+  --bg3:#EDE9DF;
+  --white:#FFFFFF;
+  --border:#E2DDD4;
+  --border2:#CEC9BF;
+  --text:#1C1A17;
+  --text2:#6B6760;
+  --text3:#9C988F;
+  --purple:#4A3FA0;
+  --purple-l:#EEEAF9;
+  --purple-m:#C4BCE8;
+  --teal:#0D6B54;
+  --teal-l:#E4F4EE;
+  --teal-m:#8DD4BB;
+  --radius:14px;
+  --radius-s:10px;
+  --shadow:0 2px 12px rgba(0,0,0,.06);
+  --shadow-l:0 4px 24px rgba(0,0,0,.09);
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f9f8f5;color:#1a1a18;min-height:100vh}
-#app{max-width:600px;margin:0 auto;padding:1.5rem 1rem 4rem}
-.screen{display:none}.screen.active{display:block}
-.lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#888780;margin-bottom:.5rem}
-.h1{font-size:22px;font-weight:500;color:#1a1a18;margin-bottom:.5rem}
-.sub{font-size:14px;color:#5F5E5A;line-height:1.6;margin-bottom:1.25rem}
-.nav{display:flex;align-items:center;justify-content:space-between;padding-bottom:1rem;border-bottom:1px solid #e8e6e0;margin-bottom:1.5rem}
-.nav-logo{font-size:15px;font-weight:500;color:#1a1a18;cursor:pointer}
-.nav-logo span{color:#7F77DD}
-.nav-tabs{display:flex;gap:4px}
-.nav-tab{font-size:12px;padding:5px 11px;border-radius:8px;border:1px solid transparent;background:none;color:#5F5E5A;cursor:pointer}
-.nav-tab:hover{background:#f0efe9}
-.nav-tab.active{border-color:#d3d1c7;color:#1a1a18;background:#fff}
-.nav-back{font-size:13px;color:#5F5E5A;cursor:pointer;padding:6px 12px;border-radius:8px;border:1px solid #d3d1c7;background:none}
-.nav-back:hover{background:#f0efe9}
-.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:8px;border:1px solid #d3d1c7;background:#fff;color:#1a1a18;font-size:13px;cursor:pointer;transition:background .15s;font-family:inherit}
-.btn:hover{background:#f0efe9}
-.btn.p{background:#3C3489;color:#EEEDFE;border-color:#3C3489;font-weight:500}
-.btn.p:hover{background:#534AB7}
-.btn.t{background:#0F6E56;color:#E1F5EE;border-color:#0F6E56;font-weight:500}
-.btn.t:hover{background:#1D9E75}
-.btn.ghost-p{border-color:#7F77DD;color:#3C3489;background:#fff}
-.btn.ghost-t{border-color:#1D9E75;color:#0F6E56;background:#fff}
-.btn.share{border-color:#d3d1c7;color:#5F5E5A;background:#f0efe9}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+#app{max-width:580px;margin:0 auto;padding:0 1rem 5rem}
+
+/* SCREENS */
+.screen{display:none;animation:fadeUp .25s ease}
+.screen.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* TYPE */
+.serif{font-family:'Lora',serif}
+.lbl{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:.5rem}
+.h1{font-family:'Lora',serif;font-size:24px;font-weight:500;color:var(--text);margin-bottom:.6rem;line-height:1.3}
+.h2{font-family:'Lora',serif;font-size:18px;font-weight:500;color:var(--text);margin-bottom:.4rem}
+.sub{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:1.25rem}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0 1rem;border-bottom:1px solid var(--border);margin-bottom:1.75rem}
+.nav-logo{font-family:'Lora',serif;font-size:17px;font-weight:500;color:var(--text);cursor:pointer;letter-spacing:-.01em}
+.nav-logo span{color:var(--purple)}
+.nav-tabs{display:flex;gap:2px;background:var(--bg2);border-radius:10px;padding:3px}
+.nav-tab{font-size:12px;padding:5px 13px;border-radius:8px;border:none;background:none;color:var(--text2);cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+.nav-tab.active{background:var(--white);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.08);font-weight:500}
+.nav-back{font-size:13px;color:var(--text2);cursor:pointer;padding:6px 14px;border-radius:var(--radius-s);border:1px solid var(--border);background:var(--white);font-family:'Inter',sans-serif;transition:all .15s}
+.nav-back:hover{background:var(--bg2)}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 20px;border-radius:var(--radius-s);border:1px solid var(--border2);background:var(--white);color:var(--text);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
+.btn:hover{background:var(--bg2);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn.primary{background:var(--purple);color:#fff;border-color:var(--purple);box-shadow:0 2px 8px rgba(74,63,160,.25)}
+.btn.primary:hover{background:#5a4fb8;box-shadow:0 4px 14px rgba(74,63,160,.3)}
+.btn.teal{background:var(--teal);color:#fff;border-color:var(--teal);box-shadow:0 2px 8px rgba(13,107,84,.2)}
+.btn.teal:hover{background:#0f8266}
+.btn.ghost-p{border-color:var(--purple-m);color:var(--purple);background:var(--purple-l)}
+.btn.ghost-p:hover{background:#e4dff5}
+.btn.ghost-t{border-color:var(--teal-m);color:var(--teal);background:var(--teal-l)}
+.btn.ghost-t:hover{background:#d5ede5}
 .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem}
+
+/* ONBOARDING */
+.onboard{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:2rem 0}
+.onboard-icon{font-size:48px;margin-bottom:1.5rem;text-align:center}
+.onboard .h1{text-align:center;font-size:26px;margin-bottom:.75rem}
+.onboard .sub{text-align:center;max-width:340px;margin:0 auto 2rem}
+.who-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:1.5rem}
+.who-card{padding:1.1rem 1.25rem;border-radius:var(--radius);border:1.5px solid var(--border);background:var(--white);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:1rem}
+.who-card:hover{border-color:var(--purple-m);background:var(--purple-l);transform:translateX(3px)}
+.who-card.sel{border-color:var(--purple);background:var(--purple-l)}
+.who-icon{font-size:24px;flex-shrink:0}
+.who-name{font-size:15px;font-weight:500;color:var(--text);margin-bottom:2px}
+.who-hint{font-size:12px;color:var(--text2)}
+.onboard-start{width:100%;padding:14px;font-size:15px}
+
 /* HOME */
-.hero{text-align:center;padding:1.25rem 0 1rem}
-.hero .h1{font-size:24px}
-.hero .sub{max-width:400px;margin:0 auto 1.25rem}
-.module-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-@media(max-width:400px){.module-cards{grid-template-columns:1fr}}
-.mc{border-radius:12px;padding:1.25rem;cursor:pointer;transition:transform .15s;position:relative;overflow:hidden}
-.mc:hover{transform:translateY(-2px)}
-.mc.pur{background:#EEEDFE;border:1px solid #AFA9EC}
-.mc.teal{background:#E1F5EE;border:1px solid #5DCAA5}
-.mc.grey{background:#f0efe9;border:1px solid #d3d1c7}
-.mc-icon{font-size:20px;margin-bottom:8px}
-.mc-t{font-size:14px;font-weight:500;margin-bottom:4px}
-.mc-t.cp{color:#3C3489}.mc-t.ct{color:#0F6E56}.mc-t.cg{color:#1a1a18}
-.mc-d{font-size:12px;line-height:1.5;color:#5F5E5A;margin-bottom:10px}
-.mc-tag{font-size:11px;padding:3px 8px;border-radius:6px;display:inline-block}
-.tp{background:#CECBF6;color:#3C3489}.tt{background:#9FE1CB;color:#085041}.tg{background:#fff;color:#5F5E5A;border:1px solid #d3d1c7}
-.mc-arr{position:absolute;bottom:.9rem;right:.9rem;font-size:14px;opacity:.35}
-.who-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:1.25rem}
-.wc{padding:9px 6px;border-radius:8px;border:1px solid #d3d1c7;background:#f0efe9;font-size:12px;color:#5F5E5A;cursor:pointer;text-align:center;transition:all .15s;line-height:1.4}
-.wc:hover,.wc.sel{border-color:#534AB7;background:#EEEDFE;color:#3C3489;font-weight:500}
-.consult{border-radius:12px;border:1px solid #d3d1c7;padding:1.1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;background:#f0efe9;margin-top:10px;flex-wrap:wrap}
-.cb-n{font-size:14px;font-weight:500;color:#1a1a18;margin-bottom:2px}
-.cb-d{font-size:12px;color:#5F5E5A;line-height:1.5}
-.share-bar{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #e8e6e0;border-radius:10px;padding:.75rem 1rem;margin-top:1rem}
-.share-bar-text{font-size:12px;color:#5F5E5A}
-.share-bar-url{font-size:12px;color:#3C3489;font-weight:500}
-/* BODY FINDER */
+.home-header{padding:2rem 0 1.5rem;text-align:center}
+.home-header .h1{font-size:26px;margin-bottom:.5rem}
+.home-greeting{font-size:13px;color:var(--text3);margin-bottom:1.5rem}
+.role-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;background:var(--purple-l);border:1px solid var(--purple-m);font-size:12px;color:var(--purple);font-weight:500;cursor:pointer;margin-bottom:1.5rem}
+.module-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:400px){.module-grid{grid-template-columns:1fr}}
+.mc{border-radius:var(--radius);padding:1.4rem 1.25rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;border:1px solid transparent}
+.mc:hover{transform:translateY(-3px);box-shadow:var(--shadow-l)}
+.mc.pur{background:linear-gradient(135deg,#F0EDF9 0%,#E8E3F5 100%);border-color:var(--purple-m)}
+.mc.teal{background:linear-gradient(135deg,#E8F6F1 0%,#D8EFE7 100%);border-color:var(--teal-m)}
+.mc.grey{background:linear-gradient(135deg,var(--bg2) 0%,var(--bg3) 100%);border-color:var(--border2)}
+.mc-icon{font-size:22px;margin-bottom:10px}
+.mc-name{font-family:'Lora',serif;font-size:14px;font-weight:500;margin-bottom:5px}
+.mc-name.cp{color:var(--purple)}.mc-name.ct{color:var(--teal)}.mc-name.cg{color:var(--text)}
+.mc-desc{font-size:11px;line-height:1.5;color:var(--text2);margin-bottom:10px}
+.mc-badge{font-size:10px;padding:2px 8px;border-radius:20px;display:inline-block;font-weight:500}
+.bp{background:var(--purple-l);color:var(--purple)}.bt{background:var(--teal-l);color:var(--teal)}.bg{background:var(--white);color:var(--text2);border:1px solid var(--border)}
+.mc-arr{position:absolute;bottom:1rem;right:1rem;font-size:13px;opacity:.3}
+
+/* CONSULT BANNER */
+.consult{border-radius:var(--radius);border:1px solid var(--border);padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;background:var(--white);box-shadow:var(--shadow);flex-wrap:wrap;margin-top:12px}
+.cb-n{font-family:'Lora',serif;font-size:15px;font-weight:500;color:var(--text);margin-bottom:3px}
+.cb-d{font-size:12px;color:var(--text2);line-height:1.5}
+
+/* SHARE */
+.share-bar{display:flex;align-items:center;justify-content:space-between;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-s);padding:.85rem 1.1rem;margin-top:12px}
+.share-url{font-size:12px;color:var(--purple);font-weight:500}
+
+/* BODY TAGS */
 .body-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin:1rem 0}
 @media(max-width:400px){.body-grid{grid-template-columns:1fr 1fr}}
-.btag{padding:8px 12px;border-radius:8px;border:1px solid #d3d1c7;background:#f0efe9;font-size:13px;color:#5F5E5A;cursor:pointer;transition:all .15s}
-.btag:hover,.btag.sel{border-color:#534AB7;background:#EEEDFE;color:#3C3489}
-.em-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:8px;margin:1rem 0}
-@media(max-width:400px){.em-grid{grid-template-columns:1fr 1fr}}
-.emchip{padding:9px 10px;border-radius:8px;border:1px solid #d3d1c7;font-size:13px;color:#5F5E5A;cursor:pointer;text-align:center;transition:all .15s;background:#fff}
-.emchip:hover{border-color:#534AB7;background:#EEEDFE;color:#3C3489;font-weight:500}
+.btag{padding:9px 14px;border-radius:var(--radius-s);border:1px solid var(--border);background:var(--white);font-size:13px;color:var(--text2);cursor:pointer;transition:all .15s;text-align:center}
+.btag:hover,.btag.sel{border-color:var(--purple);background:var(--purple-l);color:var(--purple);font-weight:500}
+.em-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin:1rem 0}
+.emchip{padding:10px 12px;border-radius:var(--radius-s);border:1px solid var(--border);font-size:13px;color:var(--text2);cursor:pointer;text-align:center;transition:all .2s;background:var(--white)}
+.emchip:hover{border-color:var(--purple);background:var(--purple-l);color:var(--purple);font-weight:500;transform:scale(1.02)}
+
 /* CARD */
-.card{border:1px solid #d3d1c7;border-radius:12px;padding:1.5rem;background:#fff;position:relative;overflow:hidden;margin-bottom:1.25rem}
-.cbar{height:4px;position:absolute;top:0;left:0;right:0}
-.bar-p{background:linear-gradient(90deg,#7F77DD,#AFA9EC)}
-.bar-t{background:linear-gradient(90deg,#1D9E75,#5DCAA5)}
-.bar-b{background:linear-gradient(90deg,#378ADD,#85B7EB)}
-.bar-v{background:linear-gradient(90deg,#7F77DD,#5DCAA5)}
-.cpill{display:inline-block;font-size:11px;padding:3px 10px;border-radius:6px;margin:.75rem 0 .25rem}
-.pp{background:#EEEDFE;color:#3C3489}.op{background:#E1F5EE;color:#0F6E56}.ap{background:#E6F1FB;color:#185FA5}.ep{background:#EEEDFE;color:#3C3489}
-.cname{font-size:22px;font-weight:500;color:#1a1a18;margin-bottom:.2rem}
-.cauthor{font-size:12px;color:#888780;margin-bottom:.75rem}
-.cdef{font-size:13px;color:#5F5E5A;line-height:1.6;padding-bottom:1rem;border-bottom:1px solid #e8e6e0;margin-bottom:1rem}
-.ql{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:#888780;margin-bottom:.6rem}
-.qi{display:flex;gap:10px;align-items:flex-start;margin-bottom:.7rem}
-.qn{width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.qnp{background:#EEEDFE;color:#3C3489}.qnt{background:#E1F5EE;color:#0F6E56}.qnb{background:#E6F1FB;color:#185FA5}
-.qt{font-size:14px;color:#1a1a18;line-height:1.6}
-.role-box{background:#f0efe9;border-radius:8px;padding:1rem 1.25rem;margin:1rem 0}
-.rb-l{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:#888780;margin-bottom:4px}
-.rb-t{font-size:13px;color:#5F5E5A;line-height:1.6}
-textarea{width:100%;border:1px solid #d3d1c7;border-radius:8px;padding:10px 14px;font-size:14px;font-family:inherit;color:#1a1a18;background:#fff;resize:vertical;min-height:75px;margin-top:.5rem;line-height:1.6}
-/* ACT */
+.card{border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem 1.5rem;background:var(--white);position:relative;overflow:hidden;margin-bottom:1.25rem;box-shadow:var(--shadow)}
+.cbar{height:5px;position:absolute;top:0;left:0;right:0}
+.bar-p{background:linear-gradient(90deg,#6B5ED4,#A99DE0)}
+.bar-t{background:linear-gradient(90deg,#0D9E77,#5DCAA5)}
+.bar-b{background:linear-gradient(90deg,#3B7FDD,#85B7EB)}
+.bar-v{background:linear-gradient(90deg,#6B5ED4,#0D9E77)}
+.cpill{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;margin:.75rem 0 .25rem;font-weight:500}
+.pp{background:var(--purple-l);color:var(--purple)}.op{background:var(--teal-l);color:var(--teal)}.ap{background:#E8F2FB;color:#2266AA}.ep{background:var(--purple-l);color:var(--purple)}
+.cname{font-family:'Lora',serif;font-size:24px;font-weight:500;color:var(--text);margin-bottom:.25rem;line-height:1.2}
+.cauthor{font-size:11px;color:var(--text3);margin-bottom:.9rem}
+.cdef{font-size:13px;color:var(--text2);line-height:1.7;padding-bottom:1.1rem;border-bottom:1px solid var(--border);margin-bottom:1.1rem;font-style:italic}
+.ql{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:.65rem}
+.qi{display:flex;gap:10px;align-items:flex-start;margin-bottom:.8rem}
+.qn{width:24px;height:24px;border-radius:50%;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.qnp{background:var(--purple-l);color:var(--purple)}.qnt{background:var(--teal-l);color:var(--teal)}.qnb{background:#E8F2FB;color:#2266AA}
+.qt{font-size:14px;color:var(--text);line-height:1.65}
+.role-box{background:linear-gradient(135deg,var(--bg2),var(--bg3));border-radius:var(--radius-s);padding:1rem 1.25rem;margin:1rem 0;border:1px solid var(--border)}
+.rb-l{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--text3);margin-bottom:5px}
+.rb-t{font-size:13px;color:var(--text2);line-height:1.6}
+textarea{width:100%;border:1px solid var(--border);border-radius:var(--radius-s);padding:12px 14px;font-size:14px;font-family:'Inter',sans-serif;color:var(--text);background:var(--white);resize:vertical;min-height:80px;margin-top:.5rem;line-height:1.6;transition:border .15s}
+textarea:focus{outline:none;border-color:var(--purple-m)}
+
+/* ACT TABS */
 .cattabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:1rem 0 .75rem}
-.ctab{padding:9px 6px;border-radius:8px;border:1px solid #d3d1c7;background:#f0efe9;font-size:12px;color:#5F5E5A;cursor:pointer;text-align:center;transition:all .15s;line-height:1.4}
-.ctab:hover,.ctab.active{border-color:#1D9E75;background:#E1F5EE;color:#0F6E56;font-weight:500}
-.act-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.25rem}
+.ctab{padding:10px 6px;border-radius:var(--radius-s);border:1px solid var(--border);background:var(--white);font-size:12px;color:var(--text2);cursor:pointer;text-align:center;transition:all .2s;line-height:1.4}
+.ctab:hover{border-color:var(--teal-m);background:var(--teal-l)}
+.ctab.active{border-color:var(--teal);background:var(--teal-l);color:var(--teal);font-weight:500}
+.act-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem}
 @media(max-width:400px){.act-grid{grid-template-columns:1fr}}
-.amini{border:1px solid #d3d1c7;border-radius:12px;padding:.9rem;cursor:pointer;transition:all .15s;background:#fff}
-.amini:hover{border-color:#1D9E75}
-.am-time{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#888780;margin-bottom:3px}
-.am-title{font-size:13px;font-weight:500;color:#1a1a18;line-height:1.4;margin-bottom:5px}
-.tpill{font-size:11px;padding:2px 8px;border-radius:6px;display:inline-block}
-.tex{background:#E1F5EE;color:#0F6E56}.tinfo{background:#E6F1FB;color:#185FA5}.tq{background:#EEEDFE;color:#3C3489}
+.amini{border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.1rem;cursor:pointer;transition:all .2s;background:var(--white)}
+.amini:hover{border-color:var(--teal);box-shadow:var(--shadow);transform:translateY(-2px)}
+.am-time{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:4px}
+.am-title{font-family:'Lora',serif;font-size:13px;font-weight:500;color:var(--text);line-height:1.4;margin-bottom:6px}
+.tpill{font-size:11px;padding:2px 9px;border-radius:20px;display:inline-block;font-weight:500}
+.tex{background:var(--teal-l);color:var(--teal)}.tinfo{background:#E8F2FB;color:#2266AA}.tq{background:var(--purple-l);color:var(--purple)}
+
 /* PROGRESS */
-.pbar{display:flex;gap:4px;margin-bottom:1.25rem}
-.ps{height:3px;flex:1;border-radius:2px;background:#d3d1c7}
-.ps.dp{background:#7F77DD}.ps.dt{background:#1D9E75}.ps.ap2{background:#AFA9EC}.ps.at{background:#5DCAA5}
+.pbar{display:flex;gap:5px;margin-bottom:1.5rem}
+.ps{height:3px;flex:1;border-radius:2px;background:var(--border)}
+.ps.dp{background:var(--purple)}.ps.dt{background:var(--teal)}.ps.ap2{background:var(--purple-m)}.ps.at{background:var(--teal-m)}
+
 /* FINAL Q */
-.fq{background:#f0efe9;border-radius:8px;padding:1rem 1.25rem;margin-bottom:.75rem}
-.fq p{font-size:14px;color:#1a1a18;line-height:1.6}
-hr.div{border:none;border-top:1px solid #e8e6e0;margin:1.25rem 0}
+.fq{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-s);padding:1rem 1.25rem;margin-bottom:.75rem}
+.fq p{font-size:14px;color:var(--text);line-height:1.6}
+hr.div{border:none;border-top:1px solid var(--border);margin:1.5rem 0}
+
+/* COMPLETION SCREEN */
+.completion{text-align:center;padding:2.5rem 0}
+.completion-icon{font-size:52px;margin-bottom:1.25rem}
+.completion .h1{font-size:22px;margin-bottom:.5rem}
+.completion .sub{max-width:320px;margin:0 auto 1.75rem}
+.next-steps{display:grid;gap:10px;margin-bottom:1.5rem}
+.next-step{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;border-radius:var(--radius);border:1px solid var(--border);background:var(--white);cursor:pointer;transition:all .2s;text-align:left}
+.next-step:hover{border-color:var(--purple-m);transform:translateX(4px);box-shadow:var(--shadow)}
+.ns-icon{font-size:20px;flex-shrink:0}
+.ns-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px}
+.ns-desc{font-size:11px;color:var(--text2)}
+
 /* GROUP */
-.group-info{border:1px solid #d3d1c7;border-radius:12px;padding:1.25rem;background:#f0efe9;margin-bottom:1rem}
+.group-info{border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;background:var(--white);margin-bottom:1rem;box-shadow:var(--shadow)}
 .group-step{display:flex;gap:12px;align-items:flex-start;margin-bottom:.9rem}
-.gs-num{width:26px;height:26px;border-radius:50%;background:#E1F5EE;color:#0F6E56;font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.gs-text{font-size:13px;color:#1a1a18;line-height:1.6}
-.deck-pick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:1rem 0}
-.deck-btn{padding:1rem;border-radius:12px;border:2px solid transparent;cursor:pointer;transition:all .15s;text-align:center}
-.deck-btn.emo{background:#EEEDFE;border-color:#AFA9EC}
-.deck-btn.act{background:#E1F5EE;border-color:#9FE1CB}
-.deck-btn.both{background:#f0efe9;border-color:#d3d1c7;grid-column:1/-1}
-.deck-btn.selected{border-width:2px}
-.deck-btn.emo.selected{border-color:#3C3489}
-.deck-btn.act.selected{border-color:#0F6E56}
-.deck-btn.both.selected{border-color:#888780}
-.deck-btn-icon{font-size:20px;margin-bottom:4px}
+.gs-num{width:28px;height:28px;border-radius:50%;background:var(--teal-l);color:var(--teal);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gs-text{font-size:13px;color:var(--text);line-height:1.6;padding-top:4px}
+.deck-pick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:1rem 0}
+.deck-btn{padding:1.1rem;border-radius:var(--radius);border:2px solid var(--border);cursor:pointer;transition:all .2s;text-align:center;background:var(--white)}
+.deck-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.deck-btn.emo{background:var(--purple-l)}
+.deck-btn.act{background:var(--teal-l)}
+.deck-btn.both{background:var(--bg2);grid-column:1/-1}
+.deck-btn.emo.selected{border-color:var(--purple)}
+.deck-btn.act.selected{border-color:var(--teal)}
+.deck-btn.both.selected{border-color:var(--border2)}
+.deck-btn-icon{font-size:22px;margin-bottom:5px}
 .deck-btn-title{font-size:13px;font-weight:500}
-.deck-btn-title.cp{color:#3C3489}.deck-btn-title.ct{color:#0F6E56}.deck-btn-title.cg{color:#1a1a18}
-.link-box{border:1px solid #1D9E75;border-radius:8px;padding:.9rem 1.1rem;background:#E1F5EE;display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin:1rem 0;flex-wrap:wrap}
-.link-url{font-size:13px;color:#0F6E56;font-weight:500}
-.role-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:8px;font-size:12px;font-weight:500;margin:.25rem .25rem .25rem 0}
-.rb-host{background:#E1F5EE;color:#0F6E56;border:1px solid #9FE1CB}
-.rb-part{background:#EEEDFE;color:#3C3489;border:1px solid #CECBF6}
+.cp{color:var(--purple)}.ct{color:var(--teal)}.cg{color:var(--text)}
+.link-box{border:1px solid var(--teal-m);border-radius:var(--radius-s);padding:1rem 1.25rem;background:var(--teal-l);display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin:1rem 0;flex-wrap:wrap}
+.link-url{font-size:13px;color:var(--teal);font-weight:500}
+.rb-host{background:var(--teal-l);color:var(--teal);border:1px solid var(--teal-m);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500}
+.rb-part{background:var(--purple-l);color:var(--purple);border:1px solid var(--purple-m);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500}
+
 /* ABOUT */
-.about-hero{display:flex;gap:1.25rem;align-items:flex-start;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid #e8e6e0}
-.avatar-photo{width:80px;height:80px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:1px solid #d3d1c7}
-.about-name{font-size:18px;font-weight:500;color:#1a1a18;margin-bottom:3px}
-.about-role{font-size:13px;color:#5F5E5A;line-height:1.5;margin-bottom:.5rem}
+.about-hero{display:flex;gap:1.25rem;align-items:flex-start;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.avatar-photo{width:84px;height:84px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid var(--border);box-shadow:var(--shadow)}
+.about-name{font-family:'Lora',serif;font-size:19px;font-weight:500;color:var(--text);margin-bottom:3px}
+.about-role{font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:.5rem}
 .about-tags{display:flex;flex-wrap:wrap;gap:6px;margin:.5rem 0}
-.atag{font-size:12px;padding:4px 10px;border-radius:8px;border:1px solid #d3d1c7;color:#5F5E5A;background:#f0efe9}
-.atag.new{background:#EEEDFE;color:#3C3489;border-color:#AFA9EC}
+.atag{font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid var(--border);color:var(--text2);background:var(--white)}
+.atag.new{background:var(--purple-l);color:var(--purple);border-color:var(--purple-m)}
 .about-section{margin-bottom:1.25rem}
-.about-section-t{font-size:13px;font-weight:500;color:#1a1a18;margin-bottom:.4rem}
-.about-section p{font-size:13px;color:#5F5E5A;line-height:1.7}
-.badge-note{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:8px;background:#E1F5EE;border:1px solid #9FE1CB;font-size:12px;color:#0F6E56;margin-bottom:1.25rem}
-.ext-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:#3C3489;padding:6px 12px;border-radius:8px;border:1px solid #AFA9EC;background:#EEEDFE;cursor:pointer}
-.ext-link:hover{background:#CECBF6}
+.about-section-t{font-family:'Lora',serif;font-size:14px;font-weight:500;color:var(--text);margin-bottom:.4rem}
+.about-section p{font-size:13px;color:var(--text2);line-height:1.75}
+.badge-note{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-s);background:var(--teal-l);border:1px solid var(--teal-m);font-size:12px;color:var(--teal);margin-bottom:1.25rem;line-height:1.5}
+.ext-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--purple);padding:7px 14px;border-radius:var(--radius-s);border:1px solid var(--purple-m);background:var(--purple-l);cursor:pointer;font-weight:500}
+.ext-link:hover{background:#e4dff5}
 .social-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem}
+
 /* TOAST */
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#1a1a18;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;white-space:nowrap}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;padding:10px 22px;border-radius:22px;font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,.2)}
 .toast.show{opacity:1}
 </style>
 </head>
 <body>
 <div id="app">
 
+<!-- ONBOARDING -->
+<div class="screen active" id="onboard">
+  <div class="onboard">
+    <div class="onboard-icon">🌿</div>
+    <h1 class="h1 serif">Добро пожаловать</h1>
+    <p class="sub">Один вопрос — и подсказки настроятся под тебя.</p>
+
+    <p class="lbl" style="text-align:center;margin-bottom:1rem">Ты сейчас работаешь с психологом?</p>
+
+    <div class="who-grid">
+      <div class="who-card" onclick="selectWhoOnboard('client',this)">
+        <div class="who-icon">✅</div>
+        <div>
+          <div class="who-name">Да, хожу к психологу</div>
+          <div class="who-hint">Буду использовать сайт между сессиями — чтобы глубже работать с собой</div>
+        </div>
+      </div>
+      <div class="who-card" onclick="selectWhoOnboard('solo',this)">
+        <div class="who-icon">🙋</div>
+        <div>
+          <div class="who-name">Нет, хочу сам(а)</div>
+          <div class="who-hint">Психолога нет — хочу разобраться в себе самостоятельно</div>
+        </div>
+      </div>
+      <div class="who-card" onclick="selectWhoOnboard('therapist',this)">
+        <div class="who-icon">🧭</div>
+        <div>
+          <div class="who-name">Я психолог</div>
+          <div class="who-hint">Ищу инструменты для работы с клиентами на сессиях</div>
+        </div>
+      </div>
+    </div>
+    <button class="btn primary onboard-start" id="onboard-btn" onclick="finishOnboard()" disabled style="opacity:.4">Начать →</button>
+  </div>
+</div>
+
 <!-- HOME -->
-<div class="screen active" id="home">
+<div class="screen" id="home">
   <div class="nav">
     <div class="nav-logo" onclick="go('home')">psytools<span>.</span></div>
     <div class="nav-tabs">
@@ -167,53 +275,48 @@ hr.div{border:none;border-top:1px solid #e8e6e0;margin:1.25rem 0}
       <div class="nav-tab" onclick="go('about');setNav(this)">Обо мне</div>
     </div>
   </div>
-  <div class="hero">
+  <div class="home-header">
     <p class="lbl">Психологическая самопомощь</p>
-    <h1 class="h1">Два инструмента — один путь к себе</h1>
-    <p class="sub">Выбери с чего начать. Оба инструмента работают самостоятельно, в паре или с психологом.</p>
+    <h1 class="h1">Один путь к себе</h1>
+    <p class="sub" style="max-width:360px;margin:0 auto .75rem">Выбери инструмент и начни. Всё работает прямо здесь — без регистрации.</p>
+    <div class="role-pill" onclick="go('onboard')" id="role-pill">🌱 Клиент · изменить</div>
   </div>
-  <p class="lbl">Кто ты сегодня?</p>
-  <div class="who-strip">
-    <div class="wc sel" id="wc-client" onclick="setWho('client',this)">🌱 Клиент<br><span style="font-weight:400;color:#888780;font-size:11px">работаю над собой</span></div>
-    <div class="wc" id="wc-therapist" onclick="setWho('therapist',this)">🧭 Психолог<br><span style="font-weight:400;color:#888780;font-size:11px">готовлюсь к сессии</span></div>
-    <div class="wc" id="wc-solo" onclick="setWho('solo',this)">🪞 Сам себе<br><span style="font-weight:400;color:#888780;font-size:11px">исследую один(а)</span></div>
-  </div>
-  <div class="module-cards">
+  <div class="module-grid">
     <div class="mc pur" onclick="go('em-entry')">
       <div class="mc-icon">🃏</div>
-      <div class="mc-t cp">Неслучайные эмоции</div>
-      <div class="mc-d">120 карт для проживания и называния эмоций. Закрывай гештальты.</div>
-      <span class="mc-tag tp">120 карт</span>
+      <div class="mc-name cp">Неслучайные эмоции</div>
+      <div class="mc-desc">Назови и прожи­ви то, что внутри. Закрывай гештальты.</div>
+      <span class="mc-badge bp">120 карт</span>
       <div class="mc-arr">→</div>
     </div>
     <div class="mc teal" onclick="go('act-entry')">
       <div class="mc-icon">🌿</div>
-      <div class="mc-t ct">АКТ-карты</div>
-      <div class="mc-d">55 упражнений для психологической гибкости по методу Гордона и Борушок.</div>
-      <span class="mc-tag tt">55 упражнений</span>
+      <div class="mc-name ct">АКТ-карты</div>
+      <div class="mc-desc">Упражнения для психологической гибкости.</div>
+      <span class="mc-badge bt">25 упражнений</span>
       <div class="mc-arr">→</div>
     </div>
   </div>
-  <div class="mc grey" onclick="go('group-entry')" style="margin-bottom:10px">
+  <div class="mc grey" onclick="go('group-entry')" style="margin-bottom:12px">
     <div class="mc-icon">👥</div>
-    <div class="mc-t cg">Групповой режим</div>
-    <div class="mc-d">Играй вместе — создай комнату и поделись кодом с участниками.</div>
-    <span class="mc-tag tg">онлайн-группа</span>
+    <div class="mc-name cg">Групповой режим</div>
+    <div class="mc-desc">Создай комнату и играй вместе онлайн.</div>
+    <span class="mc-badge bg">онлайн-группа</span>
     <div class="mc-arr">→</div>
   </div>
   <div class="share-bar">
     <div>
-      <div style="font-size:12px;color:#5F5E5A;margin-bottom:2px">Поделиться сайтом</div>
-      <div class="share-bar-url">psytools-vert.vercel.app</div>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:2px">Поделиться сайтом</div>
+      <div class="share-url">psytools-vert.vercel.app</div>
     </div>
-    <button class="btn share" onclick="copyLink()">Скопировать ссылку</button>
+    <button class="btn" style="font-size:12px;padding:8px 14px" onclick="copyLink()">Скопировать</button>
   </div>
   <div class="consult">
     <div>
       <div class="cb-n">Нужна живая поддержка?</div>
-      <div class="cb-d">Гештальт-психолог. Онлайн-консультации индивидуально и в группах.</div>
+      <div class="cb-d">Гештальт-психолог Анна Зятькова. Онлайн-консультации.</div>
     </div>
-    <button class="btn p" onclick="window.open('https://t.me/bezsaxarA7','_blank')" style="white-space:nowrap">Записаться →</button>
+    <button class="btn primary" onclick="window.open('https://t.me/bezsaxarA7','_blank')" style="white-space:nowrap;font-size:13px">Записаться →</button>
   </div>
 </div>
 
@@ -253,9 +356,9 @@ hr.div{border:none;border-top:1px solid #e8e6e0;margin:1.25rem 0}
   </div>
   <hr class="div">
   <div class="about-section-t" style="margin-bottom:.5rem">Записаться на консультацию</div>
-  <p style="font-size:13px;color:#5F5E5A;margin-bottom:.75rem">Индивидуальная работа и группы. Онлайн.</p>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:.75rem">Индивидуальная работа и группы. Онлайн.</p>
   <div class="social-row">
-    <button class="btn p" onclick="window.open('https://t.me/bezsaxarA7','_blank')">Telegram →</button>
+    <button class="btn primary" onclick="window.open('https://t.me/bezsaxarA7','_blank')">Telegram →</button>
     <button class="btn" onclick="window.open('https://www.b17.ru/avoktaiz/','_blank')">Профиль b17</button>
   </div>
 </div>
@@ -274,21 +377,12 @@ hr.div{border:none;border-top:1px solid #e8e6e0;margin:1.25rem 0}
   </div>
   <p class="lbl" style="margin-top:1.25rem">Выбери колоду</p>
   <div class="deck-pick">
-    <div class="deck-btn emo selected" id="deck-emo" onclick="selectDeck('emo')">
-      <div class="deck-btn-icon">🃏</div>
-      <div class="deck-btn-title cp">Эмоции</div>
-    </div>
-    <div class="deck-btn act" id="deck-act" onclick="selectDeck('act')">
-      <div class="deck-btn-icon">🌿</div>
-      <div class="deck-btn-title ct">АКТ</div>
-    </div>
-    <div class="deck-btn both" id="deck-both" onclick="selectDeck('both')">
-      <div class="deck-btn-icon">🃏🌿</div>
-      <div class="deck-btn-title cg">Обе колоды</div>
-    </div>
+    <div class="deck-btn emo selected" id="deck-emo" onclick="selectDeck('emo')"><div class="deck-btn-icon">🃏</div><div class="deck-btn-title cp">Эмоции</div></div>
+    <div class="deck-btn act" id="deck-act" onclick="selectDeck('act')"><div class="deck-btn-icon">🌿</div><div class="deck-btn-title ct">АКТ</div></div>
+    <div class="deck-btn both" id="deck-both" onclick="selectDeck('both')"><div class="deck-btn-icon">🃏🌿</div><div class="deck-btn-title cg">Обе колоды</div></div>
   </div>
   <div class="btn-row" style="margin-top:.75rem">
-    <button class="btn t" onclick="createRoom()">Создать комнату →</button>
+    <button class="btn teal" onclick="createRoom()">Создать комнату →</button>
     <button class="btn" onclick="joinRoom()">Войти по коду</button>
   </div>
   <div id="room-area" style="margin-top:1.25rem"></div>
@@ -298,14 +392,14 @@ hr.div{border:none;border-top:1px solid #e8e6e0;margin:1.25rem 0}
 <div class="screen" id="group-play">
   <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div><button class="nav-back" onclick="go('group-entry')">← Выйти</button></div>
   <div style="display:flex;align-items:center;gap:8px;margin-bottom:1.25rem">
-    <span class="role-badge rb-host" id="gp-role-badge">👑 Ведущий</span>
-    <span style="font-size:12px;color:#888780" id="gp-room-label">Комната #0000</span>
+    <span id="gp-role-badge" class="rb-host">👑 Ведущий</span>
+    <span style="font-size:12px;color:var(--text3)" id="gp-room-label">Комната #0000</span>
   </div>
   <div class="pbar"><div class="ps dt"></div><div class="ps dt"></div><div class="ps at"></div></div>
   <div id="gp-card-wrap"></div>
   <div class="fq" style="margin-top:.5rem"><p class="lbl">Твой ответ</p><textarea placeholder="Опиши ситуацию..."></textarea></div>
   <div style="margin-top:1rem"><p class="lbl" style="margin-bottom:.5rem">Вопросы от участников</p>
-    <div style="display:grid;gap:6px">
+    <div style="display:grid;gap:8px">
       <div class="fq"><p>Почему ты так поступил(а)?</p></div>
       <div class="fq"><p>О чём это для тебя?</p></div>
       <div class="fq"><p>Как бы ты поступил(а) если бы...</p></div>
@@ -317,7 +411,7 @@ hr.div{border:none;border-top:1px solid #e8e6e0;margin:1.25rem 0}
   <div class="fq"><p>Что ты готов(а) для этого предпринять?</p><textarea placeholder="Ответ..."></textarea></div>
   <div class="fq"><p>Что ты чувствуешь прямо сейчас?</p><textarea placeholder="Ответ..."></textarea></div>
   <div class="btn-row">
-    <button class="btn t" onclick="groupNext()">Следующая карта →</button>
+    <button class="btn teal" onclick="groupNext()">Следующая карта →</button>
     <button class="btn ghost-p" onclick="go('home')">Завершить игру</button>
   </div>
 </div>
@@ -327,15 +421,17 @@ hr.div{border:none;border-top:1px solid #e8e6e0;margin:1.25rem 0}
   <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div><button class="nav-back" onclick="go('home')">← Назад</button></div>
   <p class="lbl">Неслучайные эмоции</p>
   <h1 class="h1">Что ты чувствуешь прямо сейчас?</h1>
-  <p class="sub">Начни с телесного ощущения — система поможет найти слово.</p>
-  <div class="btn-row"><button class="btn p" onclick="go('em-body')">Найти через тело →</button><button class="btn" onclick="drawEmo()">Случайная карта</button></div>
+  <p class="sub">Начни с телесного ощущения — система поможет найти слово. Или вытяни случайную карту.</p>
+  <div class="btn-row"><button class="btn primary" onclick="go('em-body')">Найти через тело →</button><button class="btn" onclick="drawEmo()">Случайная карта</button></div>
 </div>
 
 <!-- EMOTIONS BODY -->
 <div class="screen" id="em-body">
   <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div><button class="nav-back" onclick="go('em-entry')">← Назад</button></div>
   <div class="pbar"><div class="ps dp"></div><div class="ps ap2"></div><div class="ps"></div><div class="ps"></div></div>
-  <p class="lbl">Шаг 1 из 3</p><h1 class="h1">Что происходит в теле?</h1>
+  <p class="lbl">Шаг 1 из 3</p>
+  <h1 class="h1">Что происходит в теле?</h1>
+  <p class="sub">Выбери одно или несколько — то, что сейчас есть:</p>
   <div class="body-grid">
     <div class="btag" onclick="toggleTag(this,'тяжесть в груди')">тяжесть в груди</div>
     <div class="btag" onclick="toggleTag(this,'ком в горле')">ком в горле</div>
@@ -350,15 +446,16 @@ hr.div{border:none;border-top:1px solid #e8e6e0;margin:1.25rem 0}
     <div class="btag" onclick="toggleTag(this,'покалывание')">покалывание</div>
     <div class="btag" onclick="toggleTag(this,'онемение')">онемение</div>
   </div>
-  <div class="btn-row"><button class="btn p" onclick="findEmotions()">Подобрать эмоцию →</button></div>
+  <div class="btn-row"><button class="btn primary" onclick="findEmotions()">Подобрать эмоцию →</button></div>
 </div>
 
 <!-- EMOTIONS SUGGEST -->
 <div class="screen" id="em-suggest">
   <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div><button class="nav-back" onclick="go('em-body')">← Назад</button></div>
   <div class="pbar"><div class="ps dp"></div><div class="ps dp"></div><div class="ps ap2"></div><div class="ps"></div></div>
-  <p class="lbl">Шаг 2 из 3</p><h1 class="h1">Похоже на...</h1>
-  <p class="sub">Выбери то, что откликается:</p>
+  <p class="lbl">Шаг 2 из 3</p>
+  <h1 class="h1">Похоже на...</h1>
+  <p class="sub">Выбери то, что откликается сильнее всего:</p>
   <div class="em-grid" id="em-chips"></div>
 </div>
 
@@ -368,26 +465,50 @@ hr.div{border:none;border-top:1px solid #e8e6e0;margin:1.25rem 0}
   <div class="pbar"><div class="ps dp"></div><div class="ps dp"></div><div class="ps dp"></div><div class="ps ap2"></div></div>
   <div class="card" id="em-card-c"></div>
   <div class="role-box" id="em-role-box"></div>
-  <p class="sub" style="margin-top:.5rem">Вспомни конкретную ситуацию:</p>
+  <p class="sub" style="margin-top:.5rem">Вспомни конкретную ситуацию когда ты испытывал(а) это:</p>
   <textarea placeholder="Это было, когда..."></textarea>
   <div class="btn-row" style="margin-top:.75rem">
-    <button class="btn p" onclick="go('em-final')">Завершающие вопросы →</button>
+    <button class="btn primary" onclick="go('em-final')">Завершить практику →</button>
     <button class="btn" onclick="drawEmo()">Другая карта</button>
-    <button class="btn ghost-t" onclick="go('act-entry')">Перейти к АКТ →</button>
+    <button class="btn ghost-t" onclick="go('act-entry')">АКТ →</button>
   </div>
 </div>
 
 <!-- EMOTIONS FINAL -->
 <div class="screen" id="em-final">
   <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div><button class="nav-back" onclick="go('em-card')">← Назад</button></div>
-  <p class="lbl">Завершение</p><h1 class="h1">Три последних вопроса</h1>
+  <p class="lbl">Шаг 3 из 3 — завершение</p>
+  <h1 class="h1">Три последних вопроса</h1>
+  <p class="sub">Возьми паузу. Эти вопросы помогают закрыть цикл.</p>
   <div class="fq"><p class="lbl">Вопрос 1</p><p>Ты хотел(а) бы испытывать это чувство ещё раз?</p><textarea placeholder="Мой ответ..."></textarea></div>
   <div class="fq"><p class="lbl">Вопрос 2</p><p>Что ты готов(а) для этого предпринять?</p><textarea placeholder="Мой ответ..."></textarea></div>
   <div class="fq"><p class="lbl">Вопрос 3</p><p>Что ты чувствуешь прямо сейчас?</p><textarea placeholder="Мой ответ..."></textarea></div>
   <hr class="div">
-  <div class="btn-row">
-    <button class="btn p" onclick="go('home')">На главную</button>
-    <button class="btn ghost-t" onclick="go('act-entry')">Перейти к АКТ →</button>
+  <button class="btn primary" style="width:100%;justify-content:center;padding:13px" onclick="go('em-complete')">Завершить →</button>
+</div>
+
+<!-- EMOTIONS COMPLETE -->
+<div class="screen" id="em-complete">
+  <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div></div>
+  <div class="completion">
+    <div class="completion-icon">🌸</div>
+    <h1 class="h1">Ты завершил(а) практику</h1>
+    <p class="sub">Это уже работа. Каждый раз когда ты называешь то, что внутри — ты становишься чуть ближе к себе.</p>
+    <div class="next-steps">
+      <div class="next-step" onclick="drawEmo()">
+        <div class="ns-icon">🃏</div>
+        <div><div class="ns-title">Ещё одна карта эмоций</div><div class="ns-desc">Продолжить работу с чувствами</div></div>
+      </div>
+      <div class="next-step" onclick="go('act-entry')">
+        <div class="ns-icon">🌿</div>
+        <div><div class="ns-title">Перейти к АКТ-картам</div><div class="ns-desc">Упражнения для психологической гибкости</div></div>
+      </div>
+      <div class="next-step" onclick="window.open('https://t.me/bezsaxarA7','_blank')">
+        <div class="ns-icon">💬</div>
+        <div><div class="ns-title">Поговорить с психологом</div><div class="ns-desc">Записаться на консультацию к Анне</div></div>
+      </div>
+    </div>
+    <button class="btn" onclick="go('home')" style="width:100%;justify-content:center">На главную</button>
   </div>
 </div>
 
@@ -395,7 +516,7 @@ hr.div{border:none;border-top:1px solid #e8e6e0;margin:1.25rem 0}
 <div class="screen" id="act-entry">
   <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div><button class="nav-back" onclick="go('home')">← Назад</button></div>
   <p class="lbl">АКТ-карты</p>
-  <h1 class="h1">Три пути к психологической гибкости</h1>
+  <h1 class="h1">Три пути к гибкости</h1>
   <p class="sub">Упражнения на основе метода Тимоти Гордона и Джессики Борушок.</p>
   <div class="cattabs">
     <div class="ctab active" id="ct-o" onclick="filterACT('openness',this)">🌊<br>Открытость</div>
@@ -413,16 +534,41 @@ hr.div{border:none;border-top:1px solid #e8e6e0;margin:1.25rem 0}
   <div class="card" id="act-card-c"></div>
   <div class="role-box" id="act-role-box"></div>
   <p class="sub" style="margin-top:1rem">Заметки после практики:</p>
-  <textarea placeholder="Что я заметил(а)..."></textarea>
+  <textarea placeholder="Что я заметил(а), что изменилось..."></textarea>
   <div class="btn-row">
-    <button class="btn t" onclick="go('act-entry')">Все карты</button>
+    <button class="btn teal" onclick="go('act-complete')">Завершить →</button>
     <button class="btn" onclick="drawACT()">Другая карта</button>
     <button class="btn ghost-p" onclick="go('em-entry')">К эмоциям →</button>
   </div>
 </div>
 
+<!-- ACT COMPLETE -->
+<div class="screen" id="act-complete">
+  <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div></div>
+  <div class="completion">
+    <div class="completion-icon">✨</div>
+    <h1 class="h1">Практика завершена</h1>
+    <p class="sub">Маленький шаг в сторону того, что важно — это уже движение. Возвращайся сюда когда захочешь.</p>
+    <div class="next-steps">
+      <div class="next-step" onclick="drawACT()">
+        <div class="ns-icon">🌿</div>
+        <div><div class="ns-title">Ещё одна АКТ-карта</div><div class="ns-desc">Продолжить упражнения</div></div>
+      </div>
+      <div class="next-step" onclick="go('em-entry')">
+        <div class="ns-icon">🃏</div>
+        <div><div class="ns-title">Поработать с эмоциями</div><div class="ns-desc">Назвать и прожить то, что внутри</div></div>
+      </div>
+      <div class="next-step" onclick="window.open('https://t.me/bezsaxarA7','_blank')">
+        <div class="ns-icon">💬</div>
+        <div><div class="ns-title">Поговорить с психологом</div><div class="ns-desc">Записаться на консультацию к Анне</div></div>
+      </div>
+    </div>
+    <button class="btn" onclick="go('home')" style="width:100%;justify-content:center">На главную</button>
+  </div>
 </div>
-<div class="toast" id="toast">Ссылка скопирована!</div>
+
+</div>
+<div class="toast" id="toast">Ссылка скопирована 🌿</div>
 
 <script>
 const EMOTIONS=[
@@ -567,6 +713,117 @@ function groupNext(){
   if(isEmo){
     document.getElementById("gp-card-wrap").innerHTML=`<div class="card"><div class="cbar bar-p"></div><span class="cpill pp">${card.cat} · Эмоция</span><div class="cname">${card.name}</div><div class="cdef">${card.def}</div><p class="ql">Вопросы</p>${card.questions.map((q,i)=>`<div class="qi"><div class="qn qnp">${i+1}</div><div class="qt">${q}</div></div>`).join("")}</div>`;
   } else {
+    const bar={openness:"bar-t",awareness:"bar-b",engagement:"bar-v"}[card.cat];
+    const pill={openness:"op",awareness:"ap",engagement:"ep"}[card.cat];
+    const cat={openness:"Открытость",awareness:"Осознанность",engagement:"Вовлечённость"}[card.cat];
+    document.getElementById("gp-card-wrap").innerHTML=`<div class="card"><div class="cbar ${bar}"></div><span class="cpill ${pill}">${cat} · АКТ</span><div class="cname">${card.title}</div><div class="cdef">${card.desc}</div><p class="ql">Практика</p>${card.steps.map((s,i)=>`<div class="qi"><div class="qn qnt">${i+1}</div><div class="qt">${s}</div></div>`).join("")}</div>`;
+  }
+}
+
+const catDesc={openness:"Замечать трудные мысли и чувства — и опираться на них, не убегая.",awareness:"Укрепить связь с настоящим моментом. Работать осознанно каждый день.",engagement:"Жизнь — это делание. Делать больше вне зависимости от боли."};
+const typeLabel={exercise:"упражнение",info:"информация",question:"вопрос"};
+let selTags=new Set(),currentWho="client",currentACTCat="openness",currentDeck="emo",roomCode="";
+
+function selectWhoOnboard(w,el){
+  currentWho=w;
+  document.querySelectorAll(".who-card").forEach(c=>c.classList.remove("sel"));
+  el.classList.add("sel");
+  const btn=document.getElementById("onboard-btn");
+  btn.disabled=false;btn.style.opacity="1";
+}
+
+function finishOnboard(){
+  const labels={client:"✅ Работаю с психологом",therapist:"🧭 Я психолог",solo:"🙋 Работаю сам(а)"};
+  document.getElementById("role-pill").textContent=labels[currentWho]+" · изменить";
+  go("home");
+}
+
+function setNav(el){document.querySelectorAll(".nav-tab").forEach(t=>t.classList.remove("active"));el.classList.add("active");}
+function go(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));document.getElementById(id).classList.add("active");window.scrollTo(0,0);}
+function toggleTag(el,tag){if(selTags.has(tag)){selTags.delete(tag);el.classList.remove("sel");}else{selTags.add(tag);el.classList.add("sel");}}
+
+function copyLink(){
+  navigator.clipboard.writeText("https://psytools-vert.vercel.app/").then(()=>{
+    const t=document.getElementById("toast");t.classList.add("show");
+    setTimeout(()=>t.classList.remove("show"),2200);
+  });
+}
+
+function selectDeck(d){
+  currentDeck=d;
+  ["emo","act","both"].forEach(id=>document.getElementById("deck-"+id).classList.remove("selected"));
+  document.getElementById("deck-"+d).classList.add("selected");
+}
+
+function findEmotions(){
+  if(!selTags.size)return;
+  const sc={};EMOTIONS.forEach(e=>sc[e.name]=0);
+  selTags.forEach(t=>(bodyMap[t]||[]).forEach(n=>sc[n]++));
+  const sorted=EMOTIONS.filter(e=>sc[e.name]>0).sort((a,b)=>sc[b.name]-sc[a.name]).slice(0,8);
+  const c=document.getElementById("em-chips");c.innerHTML="";
+  sorted.forEach(e=>{const d=document.createElement("div");d.className="emchip";d.textContent=e.name;d.onclick=()=>{showEmoCard(e);go("em-card");};c.appendChild(d);});
+  go("em-suggest");
+}
+
+function showEmoCard(e){
+  document.getElementById("em-card-c").innerHTML=`<div class="cbar bar-p"></div><span class="cpill pp">${e.cat}</span><div class="cname">${e.name}</div><div class="cdef">${e.def}</div><p class="ql">Вопросы для рефлексии</p>${e.questions.map((q,i)=>`<div class="qi"><div class="qn qnp">${i+1}</div><div class="qt">${q}</div></div>`).join("")}`;
+  const hint={client:e.client,therapist:e.therapist,solo:e.solo}[currentWho]||e.client;
+  const hl={client:"Для тебя",therapist:"Психологу",solo:"Самостоятельно"}[currentWho];
+  document.getElementById("em-role-box").innerHTML=`<div class="rb-l">${hl}</div><div class="rb-t">${hint}</div>`;
+}
+
+function drawEmo(){const e=EMOTIONS[Math.floor(Math.random()*EMOTIONS.length)];showEmoCard(e);go("em-card");}
+
+function filterACT(cat,el){
+  currentACTCat=cat;
+  document.querySelectorAll(".ctab").forEach(t=>t.classList.remove("active"));
+  el.classList.add("active");
+  document.getElementById("act-desc").textContent=catDesc[cat];
+  renderACT();
+}
+
+function renderACT(){
+  const f=ACT.filter(c=>c.cat===currentACTCat);
+  document.getElementById("act-grid").innerHTML=f.map(c=>`<div class="amini" onclick="showACTCard(${c.id})"><div class="am-time">${c.time}</div><div class="am-title">${c.title}</div><span class="tpill t${c.type==="exercise"?"ex":c.type==="info"?"info":"q"}">${typeLabel[c.type]}</span></div>`).join("");
+}
+
+function showACTCard(id){
+  const c=ACT.find(x=>x.id===id);if(!c)return;
+  const bar={openness:"bar-t",awareness:"bar-b",engagement:"bar-v"}[c.cat];
+  const pill={openness:"op",awareness:"ap",engagement:"ep"}[c.cat];
+  const cat={openness:"Открытость",awareness:"Осознанность",engagement:"Вовлечённость"}[c.cat];
+  const qn={openness:"qnt",awareness:"qnb",engagement:"qnp"}[c.cat];
+  document.getElementById("act-card-c").innerHTML=`<div class="cbar ${bar}"></div><span class="cpill ${pill}">${cat} · ${typeLabel[c.type]}</span><div class="cname">${c.title}</div><div class="cauthor">Метод: ${c.author}</div><div class="cdef">${c.desc}</div><p class="ql">Шаги практики</p>${c.steps.map((s,i)=>`<div class="qi"><div class="qn ${qn}">${i+1}</div><div class="qt">${s}</div></div>`).join("")}`;
+  const hint={client:c.client,therapist:c.therapist,solo:c.solo}[currentWho];
+  const hl={client:"Для тебя",therapist:"Психологу",solo:"Самостоятельно"}[currentWho];
+  document.getElementById("act-role-box").innerHTML=`<div class="rb-l">${hl}</div><div class="rb-t">${hint}</div>`;
+  go("act-card");
+}
+
+function drawACT(){const c=ACT[Math.floor(Math.random()*ACT.length)];showACTCard(c.id);go("act-card");}
+
+function createRoom(){
+  roomCode=Math.floor(1000+Math.random()*9000).toString();
+  document.getElementById("room-area").innerHTML=`<div class="link-box"><div><div style="font-size:11px;color:var(--text3);margin-bottom:4px">Код комнаты</div><div class="link-url" style="font-size:28px;letter-spacing:.2em;font-weight:700;font-family:'Lora',serif">${roomCode}</div></div><button class="btn teal" onclick="startGroup('host')">Начать игру →</button></div><p style="font-size:12px;color:var(--text2);margin-top:.5rem">Поделись кодом с участниками — они вводят его при входе.</p>`;
+}
+
+function joinRoom(){const code=prompt("Введи код комнаты:");if(code){roomCode=code;startGroup("participant");}}
+
+function startGroup(role){
+  document.getElementById("gp-role-badge").textContent=role==="host"?"👑 Ведущий":"👤 Участник";
+  document.getElementById("gp-role-badge").className=role==="host"?"rb-host":"rb-part";
+  document.getElementById("gp-room-label").textContent="Комната #"+roomCode;
+  groupNext();go("group-play");
+}
+
+function groupNext(){
+  let card=null,isEmo=false;
+  if(currentDeck==="emo"||(currentDeck==="both"&&Math.random()>0.5)){
+    card=EMOTIONS[Math.floor(Math.random()*EMOTIONS.length)];isEmo=true;
+  }else{card=ACT[Math.floor(Math.random()*ACT.length)];}
+  if(isEmo){
+    document.getElementById("gp-card-wrap").innerHTML=`<div class="card"><div class="cbar bar-p"></div><span class="cpill pp">${card.cat} · Эмоция</span><div class="cname">${card.name}</div><div class="cdef">${card.def}</div><p class="ql">Вопросы</p>${card.questions.map((q,i)=>`<div class="qi"><div class="qn qnp">${i+1}</div><div class="qt">${q}</div></div>`).join("")}</div>`;
+  }else{
     const bar={openness:"bar-t",awareness:"bar-b",engagement:"bar-v"}[card.cat];
     const pill={openness:"op",awareness:"ap",engagement:"ep"}[card.cat];
     const cat={openness:"Открытость",awareness:"Осознанность",engagement:"Вовлечённость"}[card.cat];
