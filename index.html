@@ -529,7 +529,15 @@ const ACT=[
 
 const catDesc={openness:"Замечать трудные мысли и чувства — и опираться на них, не убегая.",awareness:"Укрепить связь с настоящим моментом. Работать осознанно каждый день.",engagement:"Жизнь — это делание. Делать больше вне зависимости от боли."};
 const typeLabel={exercise:"упражнение",info:"информация",question:"вопрос"};
-let selTags=new Set(),currentWho="client",currentACTCat="openness",currentDeck="emo",roomCode="";
+let selTags=new Set(),currentWho="client",currentACTCat="openness",currentDeck="emo",roomCode="",cardIndex=0;
+
+function seededRandom(seed,index){
+  let h=0;
+  const str=seed.toString()+":"+index.toString();
+  for(let i=0;i<str.length;i++){h=Math.imul(31,h)+str.charCodeAt(i)|0;}
+  h=h>>>0;
+  return (h%1000000)/1000000;
+}
 
 function go(id){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
@@ -646,15 +654,21 @@ function startGroup(role){
   document.getElementById("gp-role-badge").textContent=role==="host"?"👑 Ведущий":"👤 Участник";
   document.getElementById("gp-role-badge").className=role==="host"?"rb-host":"rb-part";
   document.getElementById("gp-room-label").textContent="Комната #"+roomCode;
+  cardIndex=0;
   groupNext();go("group-play");
 }
 
 function groupNext(){
+  const rnd1=seededRandom(roomCode, cardIndex*3);
+  const rnd2=seededRandom(roomCode, cardIndex*3+1);
+  const rnd3=seededRandom(roomCode, cardIndex*3+2);
+  cardIndex++;
+
   let card,isEmo=false;
-  if(currentDeck==="emo"||(currentDeck==="both"&&Math.random()>0.5)){
-    card=EMOTIONS[Math.floor(Math.random()*EMOTIONS.length)];isEmo=true;
+  if(currentDeck==="emo"||(currentDeck==="both"&&rnd1>0.5)){
+    card=EMOTIONS[Math.floor(rnd2*EMOTIONS.length)];isEmo=true;
   }else{
-    card=ACT[Math.floor(Math.random()*ACT.length)];
+    card=ACT[Math.floor(rnd2*ACT.length)];
   }
   if(isEmo){
     document.getElementById("gp-card-wrap").innerHTML=`<div class="card"><div class="cbar bar-p"></div><span class="cpill pp">${card.cat} · Эмоция</span><div class="cname">${card.name}</div><div class="cdef">${card.def}</div><p class="ql">Вопросы</p>${card.questions.map((q,i)=>`<div class="qi"><div class="qn qnp">${i+1}</div><div class="qt">${q}</div></div>`).join("")}</div>`;
