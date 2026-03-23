@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>psytools — психологическая самопомощь</title>
+<meta name="description" content="Психологические инструменты для самопомощи: карты эмоций и АКТ-упражнения для развития психологической гибкости.">
+<meta property="og:title" content="psytools — психологическая самопомощь">
+<meta property="og:description" content="Карты эмоций и АКТ-упражнения. Инструменты для проживания эмоций и психологической гибкости.">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiMzQzM0ODkiLz4KICA8dGV4dCB4PSIxNiIgeT0iMjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI0VFRURGRSI+cDwvdGV4dD4KPC9zdmc+" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FAF8F4;--bg2:#F3F0E9;--bg3:#EDE9DF;--white:#FFFFFF;
+  --border:#E2DDD4;--border2:#CEC9BF;
+  --text:#1C1A17;--text2:#6B6760;--text3:#9C988F;
+  --purple:#4A3FA0;--purple-l:#EEEAF9;--purple-m:#C4BCE8;
+  --teal:#0D6B54;--teal-l:#E4F4EE;--teal-m:#8DD4BB;
+  --radius:14px;--radius-s:10px;
+  --shadow:0 2px 12px rgba(0,0,0,.06);--shadow-l:0 4px 24px rgba(0,0,0,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+#app{max-width:580px;margin:0 auto;padding:0 1rem 5rem}
+.screen{display:none;animation:fadeUp .25s ease}
+.screen.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.lbl{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:.5rem}
+.h1{font-family:'Lora',serif;font-size:24px;font-weight:500;color:var(--text);margin-bottom:.6rem;line-height:1.3}
+.sub{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:1.25rem}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0 1rem;border-bottom:1px solid var(--border);margin-bottom:1.75rem}
+.nav-logo{font-family:'Lora',serif;font-size:17px;font-weight:500;color:var(--text);cursor:pointer}
+.nav-logo span{color:var(--purple)}
+.nav-tabs{display:flex;gap:2px;background:var(--bg2);border-radius:10px;padding:3px}
+.nav-tab{font-size:12px;padding:5px 13px;border-radius:8px;border:none;background:none;color:var(--text2);cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif}
+.nav-tab.active{background:var(--white);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.08);font-weight:500}
+.nav-back{font-size:13px;color:var(--text2);cursor:pointer;padding:6px 14px;border-radius:var(--radius-s);border:1px solid var(--border);background:var(--white);font-family:'Inter',sans-serif}
+.nav-back:hover{background:var(--bg2)}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 20px;border-radius:var(--radius-s);border:1px solid var(--border2);background:var(--white);color:var(--text);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
+.btn:hover{background:var(--bg2);transform:translateY(-1px)}
+.btn.primary{background:var(--purple);color:#fff;border-color:var(--purple);box-shadow:0 2px 8px rgba(74,63,160,.25)}
+.btn.primary:hover{background:#5a4fb8}
+.btn.teal{background:var(--teal);color:#fff;border-color:var(--teal)}
+.btn.teal:hover{background:#0f8266}
+.btn.ghost-p{border-color:var(--purple-m);color:var(--purple);background:var(--purple-l)}
+.btn.ghost-t{border-color:var(--teal-m);color:var(--teal);background:var(--teal-l)}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem}
+/* ONBOARD */
+.onboard{min-height:90vh;display:flex;flex-direction:column;justify-content:center;padding:2rem 0}
+.onboard-icon{font-size:48px;margin-bottom:1.5rem;text-align:center}
+.onboard .h1{text-align:center;font-size:26px;margin-bottom:.75rem}
+.onboard .sub{text-align:center;max-width:340px;margin:0 auto 2rem}
+.who-grid{display:grid;gap:10px;margin-bottom:1.5rem}
+.who-card{padding:1rem 1.25rem;border-radius:var(--radius);border:1.5px solid var(--border);background:var(--white);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:1rem}
+.who-card:hover{border-color:var(--purple-m);background:var(--purple-l)}
+.who-card.sel{border-color:var(--purple);background:var(--purple-l)}
+.who-icon{font-size:22px;flex-shrink:0}
+.who-name{font-size:15px;font-weight:500;color:var(--text);margin-bottom:2px}
+.who-hint{font-size:12px;color:var(--text2);line-height:1.4}
+.onboard-start{width:100%;padding:14px;justify-content:center;font-size:15px}
+/* HOME */
+.home-header{padding:2rem 0 1.5rem;text-align:center}
+.home-header .h1{font-size:26px;margin-bottom:.5rem}
+.role-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;background:var(--purple-l);border:1px solid var(--purple-m);font-size:12px;color:var(--purple);font-weight:500;cursor:pointer;margin-bottom:1.5rem}
+.module-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:400px){.module-grid{grid-template-columns:1fr}}
+.mc{border-radius:var(--radius);padding:1.4rem 1.25rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;border:1px solid transparent}
+.mc:hover{transform:translateY(-3px);box-shadow:var(--shadow-l)}
+.mc.pur{background:linear-gradient(135deg,#F0EDF9,#E8E3F5);border-color:var(--purple-m)}
+.mc.teal{background:linear-gradient(135deg,#E8F6F1,#D8EFE7);border-color:var(--teal-m)}
+.mc.grey{background:linear-gradient(135deg,var(--bg2),var(--bg3));border-color:var(--border2)}
+.mc-icon{font-size:22px;margin-bottom:10px}
+.mc-name{font-family:'Lora',serif;font-size:14px;font-weight:500;margin-bottom:5px}
+.mc-name.cp{color:var(--purple)}.mc-name.ct{color:var(--teal)}.mc-name.cg{color:var(--text)}
+.mc-desc{font-size:11px;line-height:1.5;color:var(--text2);margin-bottom:10px}
+.mc-badge{font-size:10px;padding:2px 8px;border-radius:20px;display:inline-block;font-weight:500}
+.bp{background:var(--purple-l);color:var(--purple)}.bt{background:var(--teal-l);color:var(--teal)}.bg{background:var(--white);color:var(--text2);border:1px solid var(--border)}
+.mc-arr{position:absolute;bottom:1rem;right:1rem;font-size:13px;opacity:.3}
+.consult{border-radius:var(--radius);border:1px solid var(--border);padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;background:var(--white);box-shadow:var(--shadow);flex-wrap:wrap;margin-top:12px}
+.cb-n{font-family:'Lora',serif;font-size:15px;font-weight:500;color:var(--text);margin-bottom:3px}
+.cb-d{font-size:12px;color:var(--text2);line-height:1.5}
+
+/* BODY */
+.body-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin:1rem 0}
+@media(max-width:400px){.body-grid{grid-template-columns:1fr 1fr}}
+.btag{padding:9px 14px;border-radius:var(--radius-s);border:1px solid var(--border);background:var(--white);font-size:13px;color:var(--text2);cursor:pointer;transition:all .15s;text-align:center}
+.btag:hover,.btag.sel{border-color:var(--purple);background:var(--purple-l);color:var(--purple);font-weight:500}
+.em-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin:1rem 0}
+.emchip{padding:10px 12px;border-radius:var(--radius-s);border:1px solid var(--border);font-size:13px;color:var(--text2);cursor:pointer;text-align:center;transition:all .2s;background:var(--white)}
+.emchip:hover{border-color:var(--purple);background:var(--purple-l);color:var(--purple);font-weight:500}
+/* CARD */
+.card{border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem 1.5rem;background:var(--white);position:relative;overflow:hidden;margin-bottom:1.25rem;box-shadow:var(--shadow)}
+.cbar{height:5px;position:absolute;top:0;left:0;right:0}
+.bar-p{background:linear-gradient(90deg,#6B5ED4,#A99DE0)}
+.bar-t{background:linear-gradient(90deg,#0D9E77,#5DCAA5)}
+.bar-b{background:linear-gradient(90deg,#3B7FDD,#85B7EB)}
+.bar-v{background:linear-gradient(90deg,#6B5ED4,#0D9E77)}
+.cpill{display:inline-block;font-size:11px;padding:3px 10px;border-radius:20px;margin:.75rem 0 .25rem;font-weight:500}
+.pp{background:var(--purple-l);color:var(--purple)}.op{background:var(--teal-l);color:var(--teal)}.ap{background:#E8F2FB;color:#2266AA}.ep{background:var(--purple-l);color:var(--purple)}
+.cname{font-family:'Lora',serif;font-size:24px;font-weight:500;color:var(--text);margin-bottom:.25rem;line-height:1.2}
+.cauthor{font-size:11px;color:var(--text3);margin-bottom:.9rem}
+.cdef{font-size:13px;color:var(--text2);line-height:1.7;padding-bottom:1rem;border-bottom:1px solid var(--border);margin-bottom:1rem;font-style:italic}
+.ql{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:.65rem}
+.qi{display:flex;gap:10px;align-items:flex-start;margin-bottom:.8rem}
+.qn{width:24px;height:24px;border-radius:50%;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.qnp{background:var(--purple-l);color:var(--purple)}.qnt{background:var(--teal-l);color:var(--teal)}.qnb{background:#E8F2FB;color:#2266AA}
+.qt{font-size:14px;color:var(--text);line-height:1.65}
+.role-box{background:linear-gradient(135deg,var(--bg2),var(--bg3));border-radius:var(--radius-s);padding:1rem 1.25rem;margin:1rem 0;border:1px solid var(--border)}
+.rb-l{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--text3);margin-bottom:5px}
+.rb-t{font-size:13px;color:var(--text2);line-height:1.6}
+textarea{width:100%;border:1px solid var(--border);border-radius:var(--radius-s);padding:12px 14px;font-size:14px;font-family:'Inter',sans-serif;color:var(--text);background:var(--white);resize:vertical;min-height:80px;margin-top:.5rem;line-height:1.6}
+textarea:focus{outline:none;border-color:var(--purple-m)}
+/* ACT */
+.cattabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:1rem 0 .75rem}
+.ctab{padding:10px 6px;border-radius:var(--radius-s);border:1px solid var(--border);background:var(--white);font-size:12px;color:var(--text2);cursor:pointer;text-align:center;transition:all .2s;line-height:1.4}
+.ctab.active{border-color:var(--teal);background:var(--teal-l);color:var(--teal);font-weight:500}
+.act-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem}
+@media(max-width:400px){.act-grid{grid-template-columns:1fr}}
+.amini{border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.1rem;cursor:pointer;transition:all .2s;background:var(--white)}
+.amini:hover{border-color:var(--teal);box-shadow:var(--shadow);transform:translateY(-2px)}
+.am-time{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:4px}
+.am-title{font-family:'Lora',serif;font-size:13px;font-weight:500;color:var(--text);line-height:1.4;margin-bottom:6px}
+.tpill{font-size:11px;padding:2px 9px;border-radius:20px;display:inline-block;font-weight:500}
+.tex{background:var(--teal-l);color:var(--teal)}.tinfo{background:#E8F2FB;color:#2266AA}.tq{background:var(--purple-l);color:var(--purple)}
+/* PROGRESS */
+.pbar{display:flex;gap:5px;margin-bottom:1.5rem}
+.ps{height:3px;flex:1;border-radius:2px;background:var(--border)}
+.ps.dp{background:var(--purple)}.ps.dt{background:var(--teal)}.ps.ap2{background:var(--purple-m)}.ps.at{background:var(--teal-m)}
+.fq{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-s);padding:1rem 1.25rem;margin-bottom:.75rem}
+.fq p{font-size:14px;color:var(--text);line-height:1.6}
+hr.div{border:none;border-top:1px solid var(--border);margin:1.5rem 0}
+/* COMPLETION */
+.completion{text-align:center;padding:2.5rem 0}
+.completion-icon{font-size:52px;margin-bottom:1.25rem}
+.completion .sub{max-width:320px;margin:0 auto 1.75rem}
+.next-steps{display:grid;gap:10px;margin-bottom:1.5rem}
+.next-step{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;border-radius:var(--radius);border:1px solid var(--border);background:var(--white);cursor:pointer;transition:all .2s;text-align:left}
+.next-step:hover{border-color:var(--purple-m);transform:translateX(4px);box-shadow:var(--shadow)}
+.ns-icon{font-size:20px;flex-shrink:0}
+.ns-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px}
+.ns-desc{font-size:11px;color:var(--text2)}
+/* GROUP */
+.group-info{border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;background:var(--white);margin-bottom:1rem;box-shadow:var(--shadow)}
+.group-step{display:flex;gap:12px;align-items:flex-start;margin-bottom:.9rem}
+.gs-num{width:28px;height:28px;border-radius:50%;background:var(--teal-l);color:var(--teal);font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gs-text{font-size:13px;color:var(--text);line-height:1.6;padding-top:4px}
+.deck-pick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:1rem 0}
+.deck-btn{padding:1.1rem;border-radius:var(--radius);border:2px solid var(--border);cursor:pointer;transition:all .2s;text-align:center;background:var(--white)}
+.deck-btn.emo{background:var(--purple-l)}.deck-btn.act{background:var(--teal-l)}.deck-btn.both{background:var(--bg2);grid-column:1/-1}
+.deck-btn.emo.selected{border-color:var(--purple)}.deck-btn.act.selected{border-color:var(--teal)}.deck-btn.both.selected{border-color:var(--border2)}
+.deck-btn-icon{font-size:22px;margin-bottom:5px}
+.deck-btn-title{font-size:13px;font-weight:500}
+.cp{color:var(--purple)}.ct{color:var(--teal)}.cg{color:var(--text)}
+.link-box{border:1px solid var(--teal-m);border-radius:var(--radius-s);padding:1rem 1.25rem;background:var(--teal-l);display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin:1rem 0;flex-wrap:wrap}
+.link-url{font-size:13px;color:var(--teal);font-weight:500}
+.rb-host{background:var(--teal-l);color:var(--teal);border:1px solid var(--teal-m);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;display:inline-block}
+.rb-part{background:var(--purple-l);color:var(--purple);border:1px solid var(--purple-m);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;display:inline-block}
+/* ABOUT */
+.about-hero{display:flex;gap:1.25rem;align-items:flex-start;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.avatar-photo{width:84px;height:84px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:2px solid var(--border)}
+.about-name{font-family:'Lora',serif;font-size:19px;font-weight:500;color:var(--text);margin-bottom:3px}
+.about-role{font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:.5rem}
+.about-tags{display:flex;flex-wrap:wrap;gap:6px;margin:.5rem 0}
+.atag{font-size:11px;padding:3px 10px;border-radius:20px;border:1px solid var(--border);color:var(--text2);background:var(--white)}
+.atag.new{background:var(--purple-l);color:var(--purple);border-color:var(--purple-m)}
+.about-section{margin-bottom:1.25rem}
+.about-section-t{font-family:'Lora',serif;font-size:14px;font-weight:500;color:var(--text);margin-bottom:.4rem}
+.about-section p{font-size:13px;color:var(--text2);line-height:1.75}
+.badge-note{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--radius-s);background:var(--teal-l);border:1px solid var(--teal-m);font-size:12px;color:var(--teal);margin-bottom:1.25rem}
+.ext-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;color:var(--purple);padding:7px 14px;border-radius:var(--radius-s);border:1px solid var(--purple-m);background:var(--purple-l);cursor:pointer;font-weight:500}
+.social-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;padding:10px 22px;border-radius:22px;font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;white-space:nowrap}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- ONBOARDING -->
+<div class="screen active" id="onboard">
+  <div class="onboard">
+    <div class="onboard-icon">🌿</div>
+    <h1 class="h1">Добро пожаловать</h1>
+    <p class="sub">Один вопрос — и подсказки настроятся под тебя.</p>
+    <p class="lbl" style="text-align:center;margin-bottom:1rem">Ты сейчас работаешь с психологом?</p>
+    <div class="who-grid">
+      <div class="who-card" onclick="selectWho('client',this)">
+        <div class="who-icon">✅</div>
+        <div><div class="who-name">Да, хожу к психологу</div><div class="who-hint">Буду использовать сайт между сессиями — чтобы глубже работать с собой</div></div>
+      </div>
+      <div class="who-card" onclick="selectWho('solo',this)">
+        <div class="who-icon">🙋</div>
+        <div><div class="who-name">Нет, хочу сам(а)</div><div class="who-hint">Психолога нет — хочу разобраться в себе самостоятельно</div></div>
+      </div>
+      <div class="who-card" onclick="selectWho('therapist',this)">
+        <div class="who-icon">🧭</div>
+        <div><div class="who-name">Я психолог</div><div class="who-hint">Ищу инструменты для работы с клиентами на сессиях</div></div>
+      </div>
+    </div>
+    <button class="btn primary onboard-start" id="onboard-btn" onclick="finishOnboard()" disabled style="opacity:.4">Начать →</button>
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="screen" id="home">
+  <div class="nav">
+    <div class="nav-logo" onclick="go('home')">psytools<span>.</span></div>
+    <div class="nav-tabs">
+      <div class="nav-tab active" onclick="goNav('home',this)">Главная</div>
+      <div class="nav-tab" onclick="goNav('about',this)">Обо мне</div>
+    </div>
+  </div>
+  <div class="home-header">
+    <p class="lbl">Психологическая самопомощь</p>
+    <h1 class="h1">Один путь к себе</h1>
+    <p class="sub" style="max-width:360px;margin:0 auto .75rem">Выбери инструмент и начни. Всё работает прямо здесь — без регистрации.</p>
+    <div class="role-pill" onclick="go('onboard')" id="role-pill">🌱 Клиент · изменить</div>
+  </div>
+  <div class="module-grid">
+    <div class="mc pur" onclick="go('em-entry')">
+      <div class="mc-icon">🃏</div>
+      <div class="mc-name cp">Неслучайные эмоции</div>
+      <div class="mc-desc">Назови и прожи­ви то, что внутри. Закрывай гештальты.</div>
+      <span class="mc-badge bp">120 карт</span>
+      <div class="mc-arr">→</div>
+    </div>
+    <div class="mc teal" onclick="go('act-entry')">
+      <div class="mc-icon">🌿</div>
+      <div class="mc-name ct">АКТ-карты</div>
+      <div class="mc-desc">Упражнения для психологической гибкости.</div>
+      <span class="mc-badge bt">25 упражнений</span>
+      <div class="mc-arr">→</div>
+    </div>
+  </div>
+  <div class="mc grey" onclick="go('group-entry')" style="margin-bottom:12px">
+    <div class="mc-icon">👥</div>
+    <div class="mc-name cg">Групповой режим</div>
+    <div class="mc-desc">Создай комнату и играй вместе онлайн.</div>
+    <span class="mc-badge bg">онлайн-группа</span>
+    <div class="mc-arr">→</div>
+  </div>
+
+  <div class="consult">
+    <div><div class="cb-n">Нужна живая поддержка?</div><div class="cb-d">Гештальт-психолог Анна Зятькова. Онлайн-консультации.</div></div>
+    <button class="btn primary" onclick="window.open('https://t.me/bezsaxarA7','_blank')" style="white-space:nowrap">Записаться →</button>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="screen" id="about">
+  <div class="nav">
+    <div class="nav-logo" onclick="go('home')">psytools<span>.</span></div>
+    <div class="nav-tabs">
+      <div class="nav-tab" onclick="goNav('home',this)">Главная</div>
+      <div class="nav-tab active" onclick="goNav('about',this)">Обо мне</div>
+    </div>
+  </div>
+  <div class="about-hero">
+    <img class="avatar-photo" src="data:image/jpeg;base64,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" alt="Анна Зятькова"/>
+    <div>
+      <div class="about-name">Анна Зятькова</div>
+      <div class="about-role">Гештальт-психолог · Диджитал дизайнер</div>
+      <div class="about-tags">
+        <span class="atag">Гештальт</span><span class="atag">АКТ</span><span class="atag">Эмоции</span>
+        <span class="atag new">Начинающий специалист</span><span class="atag">Онлайн</span>
+      </div>
+    </div>
+  </div>
+  <div class="badge-note">Я начинающий психолог — и считаю важным говорить об этом честно</div>
+  <div class="about-section">
+    <div class="about-section-t">О платформе</div>
+    <p>Я создала эти инструменты потому что верю: понять себя — не привилегия, а навык. Психологические практики должны быть доступными и такими, которые можно использовать прямо сейчас — дома, в дороге, до или после сессии.</p>
+  </div>
+  <div class="about-section">
+    <div class="about-section-t">Что здесь есть</div>
+    <p>Две колоды карт — «Неслучайные эмоции» для проживания и называния чувств, и АКТ-карты для развития психологической гибкости. Работают и в одиночку, и в группе, и в терапевтической сессии.</p>
+  </div>
+  <div class="about-section">
+    <div class="about-section-t">Профиль на b17</div>
+    <p style="margin-bottom:.6rem">Больше обо мне, моём подходе и отзывах клиентов:</p>
+    <span class="ext-link" onclick="window.open('https://www.b17.ru/avoktaiz/','_blank')">b17.ru/avoktaiz →</span>
+  </div>
+  <hr class="div">
+  <div class="about-section-t" style="margin-bottom:.5rem">Записаться на консультацию</div>
+  <p style="font-size:13px;color:var(--text2);margin-bottom:.75rem">Индивидуальная работа и группы. Онлайн.</p>
+  <div class="social-row">
+    <button class="btn primary" onclick="window.open('https://t.me/bezsaxarA7','_blank')">Telegram →</button>
+    <button class="btn" onclick="window.open('https://www.b17.ru/avoktaiz/','_blank')">Профиль b17</button>
+  </div>
+</div>
+
+<!-- GROUP ENTRY -->
+<div class="screen" id="group-entry">
+  <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div><button class="nav-back" onclick="go('home')">← Назад</button></div>
+  <p class="lbl">Групповой режим</p>
+  <h1 class="h1">Играть вместе</h1>
+  <p class="sub">Создай комнату, выбери колоду и поделись кодом с участниками.</p>
+  <div class="group-info">
+    <div class="group-step"><div class="gs-num">1</div><div class="gs-text"><strong>Ведущий</strong> создаёт комнату и выбирает колоду.</div></div>
+    <div class="group-step"><div class="gs-num">2</div><div class="gs-text"><strong>Участники</strong> заходят по коду — видят ту же карту.</div></div>
+    <div class="group-step"><div class="gs-num">3</div><div class="gs-text">Игрок отвечает на вопросы, остальные задают открытые вопросы.</div></div>
+    <div class="group-step" style="margin-bottom:0"><div class="gs-num">4</div><div class="gs-text">Три завершающих вопроса — переход к следующему участнику.</div></div>
+  </div>
+  <p class="lbl" style="margin-top:1.25rem">Выбери колоду</p>
+  <div class="deck-pick">
+    <div class="deck-btn emo selected" id="deck-emo" onclick="selectDeck('emo')"><div class="deck-btn-icon">🃏</div><div class="deck-btn-title cp">Эмоции</div></div>
+    <div class="deck-btn act" id="deck-act" onclick="selectDeck('act')"><div class="deck-btn-icon">🌿</div><div class="deck-btn-title ct">АКТ</div></div>
+    <div class="deck-btn both" id="deck-both" onclick="selectDeck('both')"><div class="deck-btn-icon">🃏🌿</div><div class="deck-btn-title cg">Обе колоды</div></div>
+  </div>
+  <div class="btn-row" style="margin-top:.75rem">
+    <button class="btn teal" onclick="createRoom()">Создать комнату →</button>
+    <button class="btn" onclick="joinRoom()">Войти по коду</button>
+  </div>
+  <div id="room-area" style="margin-top:1.25rem"></div>
+</div>
+
+<!-- GROUP PLAY -->
+<div class="screen" id="group-play">
+  <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div><button class="nav-back" onclick="go('group-entry')">← Выйти</button></div>
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:1.25rem">
+    <span id="gp-role-badge" class="rb-host">👑 Ведущий</span>
+    <span style="font-size:12px;color:var(--text3)" id="gp-room-label">Комната #0000</span>
+  </div>
+  <div class="pbar"><div class="ps dt"></div><div class="ps dt"></div><div class="ps at"></div></div>
+  <div id="gp-card-wrap"></div>
+  <div class="fq" style="margin-top:.5rem"><p class="lbl">Твой ответ</p><textarea placeholder="Опиши ситуацию..."></textarea></div>
+  <div style="margin-top:1rem"><p class="lbl" style="margin-bottom:.5rem">Вопросы от участников</p>
+    <div style="display:grid;gap:8px">
+      <div class="fq"><p>Почему ты так поступил(а)?</p></div>
+      <div class="fq"><p>О чём это для тебя?</p></div>
+      <div class="fq"><p>Как бы ты поступил(а) если бы...</p></div>
+    </div>
+  </div>
+  <hr class="div">
+  <p class="lbl">Завершающие вопросы</p>
+  <div class="fq"><p>Ты хотел(а) бы испытывать это чувство ещё раз?</p><textarea placeholder="Ответ..."></textarea></div>
+  <div class="fq"><p>Что ты готов(а) для этого предпринять?</p><textarea placeholder="Ответ..."></textarea></div>
+  <div class="fq"><p>Что ты чувствуешь прямо сейчас?</p><textarea placeholder="Ответ..."></textarea></div>
+  <div class="btn-row">
+    <button class="btn teal" onclick="groupNext()">Следующая карта →</button>
+    <button class="btn ghost-p" onclick="go('home')">Завершить игру</button>
+  </div>
+</div>
+
+<!-- EMOTIONS ENTRY -->
+<div class="screen" id="em-entry">
+  <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div><button class="nav-back" onclick="go('home')">← Назад</button></div>
+  <p class="lbl">Неслучайные эмоции</p>
+  <h1 class="h1">Что ты чувствуешь прямо сейчас?</h1>
+  <p class="sub">Начни с телесного ощущения — система поможет найти слово. Или вытяни случайную карту.</p>
+  <div class="btn-row"><button class="btn primary" onclick="go('em-body')">Найти через тело →</button><button class="btn" onclick="drawEmo()">Случайная карта</button></div>
+</div>
+
+<!-- EMOTIONS BODY -->
+<div class="screen" id="em-body">
+  <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div><button class="nav-back" onclick="go('em-entry')">← Назад</button></div>
+  <div class="pbar"><div class="ps dp"></div><div class="ps ap2"></div><div class="ps"></div><div class="ps"></div></div>
+  <p class="lbl">Шаг 1 из 3</p><h1 class="h1">Что происходит в теле?</h1>
+  <p class="sub">Выбери одно или несколько — то, что сейчас есть:</p>
+  <div class="body-grid">
+    <div class="btag" onclick="toggleTag(this,'тяжесть в груди')">тяжесть в груди</div>
+    <div class="btag" onclick="toggleTag(this,'ком в горле')">ком в горле</div>
+    <div class="btag" onclick="toggleTag(this,'учащённый пульс')">учащённый пульс</div>
+    <div class="btag" onclick="toggleTag(this,'напряжение в теле')">напряжение в теле</div>
+    <div class="btag" onclick="toggleTag(this,'пустота внутри')">пустота внутри</div>
+    <div class="btag" onclick="toggleTag(this,'тепло')">тепло</div>
+    <div class="btag" onclick="toggleTag(this,'дрожь')">дрожь</div>
+    <div class="btag" onclick="toggleTag(this,'лёгкость')">лёгкость</div>
+    <div class="btag" onclick="toggleTag(this,'усталость')">усталость</div>
+    <div class="btag" onclick="toggleTag(this,'сжатость')">сжатость</div>
+    <div class="btag" onclick="toggleTag(this,'покалывание')">покалывание</div>
+    <div class="btag" onclick="toggleTag(this,'онемение')">онемение</div>
+  </div>
+  <div class="btn-row"><button class="btn primary" onclick="findEmotions()">Подобрать эмоцию →</button></div>
+</div>
+
+<!-- EMOTIONS SUGGEST -->
+<div class="screen" id="em-suggest">
+  <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div><button class="nav-back" onclick="go('em-body')">← Назад</button></div>
+  <div class="pbar"><div class="ps dp"></div><div class="ps dp"></div><div class="ps ap2"></div><div class="ps"></div></div>
+  <p class="lbl">Шаг 2 из 3</p><h1 class="h1">Похоже на...</h1>
+  <p class="sub">Выбери то, что откликается сильнее всего:</p>
+  <div class="em-grid" id="em-chips"></div>
+</div>
+
+<!-- EMOTIONS CARD -->
+<div class="screen" id="em-card">
+  <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div><button class="nav-back" onclick="go('em-entry')">← К эмоциям</button></div>
+  <div class="pbar"><div class="ps dp"></div><div class="ps dp"></div><div class="ps dp"></div><div class="ps ap2"></div></div>
+  <div class="card" id="em-card-c"></div>
+  <div class="role-box" id="em-role-box"></div>
+  <p class="sub" style="margin-top:.5rem">Вспомни конкретную ситуацию:</p>
+  <textarea placeholder="Это было, когда..."></textarea>
+  <div class="btn-row" style="margin-top:.75rem">
+    <button class="btn primary" onclick="go('em-final')">Завершить практику →</button>
+    <button class="btn" onclick="drawEmo()">Другая карта</button>
+    <button class="btn ghost-t" onclick="go('act-entry')">АКТ →</button>
+  </div>
+</div>
+
+<!-- EMOTIONS FINAL -->
+<div class="screen" id="em-final">
+  <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div><button class="nav-back" onclick="go('em-card')">← Назад</button></div>
+  <p class="lbl">Шаг 3 из 3</p><h1 class="h1">Три последних вопроса</h1>
+  <p class="sub">Возьми паузу. Эти вопросы помогают закрыть цикл.</p>
+  <div class="fq"><p class="lbl">Вопрос 1</p><p>Ты хотел(а) бы испытывать это чувство ещё раз?</p><textarea placeholder="Мой ответ..."></textarea></div>
+  <div class="fq"><p class="lbl">Вопрос 2</p><p>Что ты готов(а) для этого предпринять?</p><textarea placeholder="Мой ответ..."></textarea></div>
+  <div class="fq"><p class="lbl">Вопрос 3</p><p>Что ты чувствуешь прямо сейчас?</p><textarea placeholder="Мой ответ..."></textarea></div>
+  <hr class="div">
+  <button class="btn primary" style="width:100%;justify-content:center;padding:13px" onclick="go('em-complete')">Завершить →</button>
+</div>
+
+<!-- EMOTIONS COMPLETE -->
+<div class="screen" id="em-complete">
+  <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div></div>
+  <div class="completion">
+    <div class="completion-icon">🌸</div>
+    <h1 class="h1">Ты завершил(а) практику</h1>
+    <p class="sub">Это уже работа. Каждый раз когда ты называешь то, что внутри — ты становишься чуть ближе к себе.</p>
+    <div class="next-steps">
+      <div class="next-step" onclick="drawEmo()"><div class="ns-icon">🃏</div><div><div class="ns-title">Ещё одна карта эмоций</div><div class="ns-desc">Продолжить работу с чувствами</div></div></div>
+      <div class="next-step" onclick="go('act-entry')"><div class="ns-icon">🌿</div><div><div class="ns-title">Перейти к АКТ-картам</div><div class="ns-desc">Упражнения для психологической гибкости</div></div></div>
+      <div class="next-step" onclick="window.open('https://t.me/bezsaxarA7','_blank')"><div class="ns-icon">💬</div><div><div class="ns-title">Поговорить с психологом</div><div class="ns-desc">Записаться на консультацию к Анне</div></div></div>
+    </div>
+    <button class="btn" onclick="go('home')" style="width:100%;justify-content:center">На главную</button>
+  </div>
+</div>
+
+<!-- ACT ENTRY -->
+<div class="screen" id="act-entry">
+  <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div><button class="nav-back" onclick="go('home')">← Назад</button></div>
+  <p class="lbl">АКТ-карты</p>
+  <h1 class="h1">Три пути к гибкости</h1>
+  <p class="sub">Упражнения на основе метода Тимоти Гордона и Джессики Борушок.</p>
+  <div class="cattabs">
+    <div class="ctab active" id="ct-o" onclick="filterACT('openness',this)">🌊<br>Открытость</div>
+    <div class="ctab" id="ct-a" onclick="filterACT('awareness',this)">🔍<br>Осознанность</div>
+    <div class="ctab" id="ct-e" onclick="filterACT('engagement',this)">🎯<br>Вовлечённость</div>
+  </div>
+  <p class="sub" id="act-desc" style="margin-bottom:1rem">Замечать трудные мысли и чувства — и опираться на них, не убегая.</p>
+  <div class="act-grid" id="act-grid"></div>
+  <div class="btn-row"><button class="btn" onclick="drawACT()">Случайная карта</button></div>
+</div>
+
+<!-- ACT CARD -->
+<div class="screen" id="act-card">
+  <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div><button class="nav-back" onclick="go('act-entry')">← Все карты</button></div>
+  <div class="card" id="act-card-c"></div>
+  <div class="role-box" id="act-role-box"></div>
+  <p class="sub" style="margin-top:1rem">Заметки после практики:</p>
+  <textarea placeholder="Что я заметил(а)..."></textarea>
+  <div class="btn-row">
+    <button class="btn teal" onclick="go('act-complete')">Завершить →</button>
+    <button class="btn" onclick="drawACT()">Другая карта</button>
+    <button class="btn ghost-p" onclick="go('em-entry')">К эмоциям →</button>
+  </div>
+</div>
+
+<!-- ACT COMPLETE -->
+<div class="screen" id="act-complete">
+  <div class="nav"><div class="nav-logo" onclick="go('home')">psytools<span>.</span></div></div>
+  <div class="completion">
+    <div class="completion-icon">✨</div>
+    <h1 class="h1">Практика завершена</h1>
+    <p class="sub">Маленький шаг в сторону того, что важно — это уже движение.</p>
+    <div class="next-steps">
+      <div class="next-step" onclick="drawACT()"><div class="ns-icon">🌿</div><div><div class="ns-title">Ещё одна АКТ-карта</div><div class="ns-desc">Продолжить упражнения</div></div></div>
+      <div class="next-step" onclick="go('em-entry')"><div class="ns-icon">🃏</div><div><div class="ns-title">Поработать с эмоциями</div><div class="ns-desc">Назвать и прожить то, что внутри</div></div></div>
+      <div class="next-step" onclick="window.open('https://t.me/bezsaxarA7','_blank')"><div class="ns-icon">💬</div><div><div class="ns-title">Поговорить с психологом</div><div class="ns-desc">Записаться на консультацию к Анне</div></div></div>
+    </div>
+    <button class="btn" onclick="go('home')" style="width:100%;justify-content:center">На главную</button>
+  </div>
+</div>
+
+</div>
+<div class="toast" id="toast">Ссылка скопирована 🌿</div>
+
+<script>
+const EMOTIONS=[
+  {name:"Высокомерие",cat:"социальные",def:"Ощущение превосходства над другими, убеждённость в своей исключительности.",questions:["Что я не принимаю в людях?","В чём я считаю себя лучше?","Какую боль прячет моё превосходство?"],body:["напряжение в теле","сжатость","тепло"],client:"Попробуй вспомнить момент честно — без осуждения себя. Это просто сигнал о потребности.",therapist:"Хорошая точка входа в работу со стыдом и самооценкой клиента.",solo:"Что за потребность стоит за этим чувством?"},
+  {name:"Гордость",cat:"достижение",def:"Тёплое удовлетворение от того, что ты сделал(а) что-то значимое.",questions:["За что именно я собой горжусь?","Кто ещё это видит?","Как я обращаюсь с этим чувством?"],body:["тепло","лёгкость"],client:"Позволь себе побыть в этом чувстве — не обесценивай его.",therapist:"Помогает клиенту укрепить контакт с собственными ресурсами.",solo:"Как часто ты позволяешь себе это замечать?"},
+  {name:"Паника",cat:"страх",def:"Острый неконтролируемый страх, ощущение надвигающейся катастрофы.",questions:["Что именно я боюсь потерять?","Что самое страшное может случиться?","Что мне нужно прямо сейчас?"],body:["учащённый пульс","дрожь","сжатость","покалывание"],client:"Сначала — дыши. Три медленных вдоха, потом работа с картой.",therapist:"Начни с заземления клиента — упражнение 5-4-3-2-1 из АКТ-карт.",solo:"Что прямо сейчас помогает мне почувствовать безопасность?"},
+  {name:"Тревога",cat:"страх",def:"Рассеянное беспокойство о будущем, ощущение неопределённости.",questions:["О чём конкретно я беспокоюсь?","Что я пытаюсь контролировать?","Что было бы, если бы этого не случилось?"],body:["учащённый пульс","напряжение в теле","ком в горле","сжатость"],client:"Назови конкретно что тревожит — неопределённость усиливает тревогу.",therapist:"Исследуй с клиентом что именно он пытается контролировать.",solo:"Запиши все тревожные мысли — вынести их на бумагу уже помогает."},
+  {name:"Печаль",cat:"потеря",def:"Тихая боль от утраты чего-то или кого-то важного.",questions:["Что именно я потерял(а)?","Что это значило для меня?","Как я обычно обращаюсь с потерями?"],body:["тяжесть в груди","ком в горле","пустота внутри","усталость"],client:"Печаль — это про любовь к тому, что важно. Позволь ей быть.",therapist:"Не торопи клиента. Печаль требует времени и присутствия.",solo:"Что эта потеря говорит о том, что для тебя ценно?"},
+  {name:"Стыд",cat:"социальные",def:"Болезненное ощущение, что ты плохой или неправильный.",questions:["Что именно меня стыдит?","Чьи глаза я чувствую на себе?","Что я скрываю и зачем?"],body:["тяжесть в груди","сжатость","онемение","напряжение в теле"],client:"Стыд растёт в тишине и тает когда его называют. Ты уже сделал(а) первый шаг.",therapist:"Работай со стыдом осторожно — не торопи раскрытие.",solo:"Что бы ты сказал(а) другу в похожей ситуации?"},
+  {name:"Злость",cat:"граница",def:"Энергия, которая говорит: моя граница нарушена.",questions:["Что именно меня задело?","Какая потребность не была удовлетворена?","Что я хочу изменить?"],body:["учащённый пульс","напряжение в теле","тепло","дрожь"],client:"Злость — это энергия. Что она хочет защитить?",therapist:"Помоги клиенту найти потребность за злостью.",solo:"Что именно нарушила эта ситуация — твою ценность, границу, ожидание?"},
+  {name:"Одиночество",cat:"связь",def:"Ощущение разрыва между собой и другими людьми.",questions:["Когда я почувствовал(а) себя одиноким?","Чего мне не хватало?","Как я отгораживаюсь от других?"],body:["пустота внутри","тяжесть в груди","усталость","онемение"],client:"Одиночество — сигнал о потребности в связи. Что мешает её установить?",therapist:"Исследуй с клиентом его паттерны отдаления от людей.",solo:"Есть ли кто-то кому ты мог(ла) бы написать прямо сейчас?"},
+  {name:"Зависть",cat:"социальные",def:"Боль от чужого успеха в том, чего ты сам(а) хочешь.",questions:["Чему именно я завидую?","Что это говорит о моих желаниях?","Что мне мешает иметь это?"],body:["тяжесть в груди","напряжение в теле","сжатость"],client:"Зависть — это указатель на твои собственные желания. Что она показывает?",therapist:"Зависть часто указывает на нереализованные ценности клиента.",solo:"Если убрать боль — чего именно ты хочешь для себя?"},
+  {name:"Вина",cat:"ответственность",def:"Ощущение, что ты причинил(а) вред или нарушил(а) свои ценности.",questions:["Что именно я сделал(а) не так?","Перед кем мне стыдно?","Что я могу исправить?"],body:["тяжесть в груди","ком в горле","усталость"],client:"Вина указывает на твои ценности. Что именно для тебя важно в этой ситуации?",therapist:"Различай здоровую вину (сигнал) и токсичную (наказание).",solo:"Что реально в твоих силах исправить — а что уже нет?"},
+  {name:"Радость",cat:"удовольствие",def:"Лёгкое и тёплое ощущение удовольствия от момента.",questions:["Что именно приносит мне радость?","Как часто я позволяю себе это чувствовать?","С кем хочется этим поделиться?"],body:["тепло","лёгкость","учащённый пульс"],client:"Остановись и побудь в этом чувстве чуть дольше обычного.",therapist:"Работа с радостью укрепляет ресурсное состояние клиента.",solo:"Как сделать больше того, что вызывает это чувство?"},
+  {name:"Обида",cat:"отношения",def:"Боль от ощущения несправедливости или предательства.",questions:["Что именно причинило мне боль?","Чего я ожидал(а) от другого человека?","Что мне нужно, чтобы отпустить это?"],body:["тяжесть в груди","ком в горле","сжатость"],client:"За обидой всегда есть ожидание. Было ли оно озвучено?",therapist:"Исследуй с клиентом откуда берутся эти ожидания.",solo:"Что тебе нужно от этого человека — и можешь ли ты это попросить?"},
+  {name:"Страх",cat:"безопасность",def:"Сигнал опасности — реальной или воображаемой.",questions:["Что именно меня пугает?","Насколько эта угроза реальна?","Что мне нужно чтобы почувствовать себя в безопасности?"],body:["учащённый пульс","дрожь","сжатость","онемение"],client:"Страх — это забота о тебе. Что он пытается тебя защитить?",therapist:"Помоги клиенту различить реальную угрозу и воображаемую.",solo:"Что самое страшное может случиться — и как бы ты с этим справился(лась)?"},
+  {name:"Разочарование",cat:"ожидания",def:"Боль от несоответствия реальности нашим ожиданиям.",questions:["Чего именно я ожидал(а)?","Откуда взялось это ожидание?","Что мне нужно пересмотреть?"],body:["тяжесть в груди","усталость","пустота внутри"],client:"Разочарование — это про ожидания. Были ли они реалистичны?",therapist:"Помоги клиенту исследовать источник ожиданий.",solo:"Что реально было в твоих силах — а что нет?"},
+  {name:"Благодарность",cat:"связь",def:"Тёплое признание того, что кто-то или что-то обогатило твою жизнь.",questions:["Кому или чему я благодарен(а)?","Как я выражаю благодарность?","Что мешает мне замечать это чаще?"],body:["тепло","лёгкость"],client:"Попробуй сказать спасибо вслух — себе или кому-то важному.",therapist:"Практика благодарности укрепляет контакт клиента с ресурсами.",solo:"Три вещи за которые ты благодарен(а) прямо сейчас."},
+  {name:"Беспомощность",cat:"контроль",def:"Ощущение что ты не можешь повлиять на происходящее.",questions:["В чём именно я чувствую себя беспомощным(ой)?","Что я могу контролировать?","Кто мог бы помочь?"],body:["пустота внутри","усталость","онемение","тяжесть в груди"],client:"Найди хоть одно маленькое действие которое в твоих силах — прямо сейчас.",therapist:"Работай с ресурсами и опорами клиента.",solo:"Что вообще зависит от меня в этой ситуации?"},
+  {name:"Воодушевление",cat:"энергия",def:"Подъём, желание действовать, предвкушение чего-то важного.",questions:["Что именно зажигает меня?","Как я удерживаю эту энергию?","К чему это ведёт?"],body:["учащённый пульс","тепло","лёгкость"],client:"Зафиксируй это состояние — запиши или сделай один шаг прямо сейчас.",therapist:"Исследуй с клиентом что стоит за этим энергетическим подъёмом.",solo:"Что мешает тебе чаще бывать в этом состоянии?"},
+  {name:"Смущение",cat:"социальные",def:"Лёгкий дискомфорт от ощущения что тебя видят или оценивают.",questions:["В чьём взгляде я нуждаюсь?","Что я боюсь показать?","Как это связано с моей самооценкой?"],body:["тепло","напряжение в теле","покалывание"],client:"Смущение говорит о том, что чужое мнение важно. Чьё именно?",therapist:"Хорошая точка для исследования потребности в принятии.",solo:"Что ты скрываешь — и что случится если это увидят?"},
+  {name:"Любопытство",cat:"исследование",def:"Живой интерес к чему-то новому или неизвестному.",questions:["Что именно меня притягивает?","Чему я хочу научиться?","Когда я последний раз чувствовал(а) это?"],body:["лёгкость","тепло","покалывание"],client:"Следуй за этим чувством — оно указывает на твои ценности.",therapist:"Любопытство — ресурс. Помоги клиенту его развивать.",solo:"Что ты давно хотел(а) исследовать но откладывал(а)?"}
+];
+const bodyMap={"тяжесть в груди":["Печаль","Вина","Обида","Одиночество","Зависть","Разочарование","Беспомощность"],"ком в горле":["Тревога","Печаль","Вина","Обида"],"учащённый пульс":["Паника","Тревога","Злость","Радость","Воодушевление","Страх"],"напряжение в теле":["Тревога","Злость","Высокомерие","Зависть","Стыд","Смущение"],"пустота внутри":["Одиночество","Печаль","Разочарование","Беспомощность"],"тепло":["Гордость","Радость","Высокомерие","Злость","Благодарность","Воодушевление","Смущение","Любопытство"],"дрожь":["Паника","Злость","Страх"],"лёгкость":["Гордость","Радость","Благодарность","Воодушевление","Любопытство"],"усталость":["Печаль","Одиночество","Вина","Разочарование","Беспомощность"],"сжатость":["Паника","Тревога","Высокомерие","Стыд","Обида","Зависть","Страх"],"покалывание":["Паника","Смущение","Любопытство"],"онемение":["Стыд","Одиночество","Страх","Беспомощность"]};
+const ACT=[
+  {id:1,cat:"openness",type:"exercise",title:"Лист на реке",time:"5 мин",author:"Тимоти Гордон",desc:"Наблюдать за мыслями как за листьями на реке — техника дефузии.",steps:["Закрой глаза, представь тихую реку.","Каждую мысль помести на листок.","Наблюдай как листок уплывает. Не останавливай.","Если мысль прилипла — заметь и снова помести.","5 минут. Три вдоха. Открой глаза."],client:"5 минут утром — особенно перед сложным разговором.",therapist:"Предложи в сессии. После: какие мысли было сложнее отпускать?",solo:"Попробуй с тревожными мыслями перед сном."},
+  {id:2,cat:"openness",type:"question",title:"Что это за история?",time:"3 мин",author:"Джессика Борушок",desc:"Замечать когда ум рассказывает истории вместо фактов.",steps:["Вспомни мысль, которая причиняет боль.","Это факт или история?","Переформулируй: Мой ум говорит мне, что...","Заметь: изменилось ли ощущение?"],client:"Запиши мысль и добавь: Мой ум говорит мне, что...",therapist:"Используй когда клиент застревает в самокритике.",solo:"Попробуй с самой навязчивой мыслью недели."},
+  {id:3,cat:"openness",type:"exercise",title:"Руки как мысли",time:"7 мин",author:"Тимоти Гордон",desc:"Телесная метафора — когда мысли закрывают обзор.",steps:["Поднеси ладони к лицу — ничего не видно.","Это мысли, когда ты слит(а) с ними.","Медленно опусти руки на колени.","Руки рядом, но ты не внутри мыслей."],client:"Делай когда чувствуешь что утонул(а) в мыслях.",therapist:"Наглядная метафора дефузии для клиентов.",solo:"Можно делать тихо прямо за столом."},
+  {id:4,cat:"openness",type:"info",title:"Принятие vs сдача",time:"чтение",author:"Тимоти Гордон",desc:"Принятие — не смириться. Это сделать место для боли, не борясь с ней.",steps:["Принятие = позволить боли быть без усиления борьбой.","Сдача = потерять контакт с тем, что важно.","Принятие освобождает энергию для действия.","Сколько сил ты тратишь на борьбу с этой мыслью?"],client:"Перечитай когда кажется что принять = согласиться.",therapist:"Объясни в начале работы с принятием.",solo:"Точка опоры в трудный день."},
+  {id:5,cat:"openness",type:"exercise",title:"Имя монстру",time:"5 мин",author:"Джессика Борушок",desc:"Дать имя страху — способ создать дистанцию.",steps:["Вспомни главный страх прямо сейчас.","Придумай нелепое имя — например Тревожный Боря.","Когда появляется: О, Боря снова пришёл.","Замечай изменение интенсивности."],client:"Называй страх по имени хотя бы неделю.",therapist:"Хорошо работает с клиентами склонными к юмору.",solo:"Придумай имя тому, что тревожит — прямо сейчас."},
+  {id:6,cat:"openness",type:"exercise",title:"Облака мыслей",time:"8 мин",author:"Джессика Борушок",desc:"Наблюдать как мысли появляются и уходят — как облака.",steps:["Закрой глаза. Представь ясное небо.","Ты — небо. Мысли — облака.","Позволь каждой мысли появиться и уплыть.","Если стал(а) облаком — мягко вернись в позицию неба."],client:"10 минут в тихом месте.",therapist:"Хорошо после напряжённого материала.",solo:"Делай когда голова переполнена."},
+  {id:7,cat:"openness",type:"question",title:"Ценой чего борьба?",time:"5 мин",author:"Тимоти Гордон",desc:"Исследовать что теряешь когда борешься с болью.",steps:["Назови то, с чем ты сейчас борешься.","Как долго ты это делаешь?","Что эта борьба забирает — энергию, время, отношения?","Что стало бы возможным если бы ты перестал(а) бороться?"],client:"Честный вопрос самому себе.",therapist:"Помогает клиенту увидеть цену контроля.",solo:"Запиши ответы на бумаге."},
+  {id:8,cat:"openness",type:"exercise",title:"Я замечаю что...",time:"4 мин",author:"Джессика Борушок",desc:"Называть внутренний опыт через наблюдение, а не слияние.",steps:["Обрати внимание на любую мысль или чувство.","Не мне страшно — а я замечаю, что появляется страх.","Не я злой — а я замечаю злость.","Повтори с тремя разными состояниями."],client:"Переформулируй состояния в течение дня.",therapist:"Простое упражнение для начала дефузии.",solo:"Язык наблюдателя меняет отношение к переживаниям."},
+  {id:9,cat:"openness",type:"info",title:"Что такое дефузия",time:"чтение",author:"Тимоти Гордон",desc:"Дефузия — создание дистанции между собой и своими мыслями.",steps:["Слияние: Я неудачник — мысль и ты одно целое.","Дефузия: Я замечаю мысль, что я неудачник — ты больше этой мысли.","Дефузия не делает мысли ложными — она меняет их власть над тобой.","Эта мысль полезна мне прямо сейчас?"],client:"Читай когда мысли кажутся абсолютной правдой.",therapist:"Объясни дефузию до практик.",solo:"Фундамент для работы с навязчивыми мыслями."},
+  {id:10,cat:"openness",type:"exercise",title:"Спасибо, ум",time:"3 мин",author:"Джессика Борушок",desc:"Поблагодарить ум за попытку защитить — и отпустить.",steps:["Услышь болезненную мысль.","Скажи: Спасибо, ум. Я знаю, ты пытаешься помочь.","Мягко верни внимание к важному.","Повтори при следующей навязчивой мысли."],client:"Меняет отношение с борьбы на принятие.",therapist:"Простая техника снижения самокритики.",solo:"Попробуй сегодня с первой же тревожной мыслью."},
+  {id:11,cat:"awareness",type:"exercise",title:"5-4-3-2-1",time:"3 мин",author:"Тимоти Гордон",desc:"Якорение в настоящем через пять органов чувств.",steps:["5 вещей которые ты видишь.","4 вещи которые можешь потрогать.","3 звука которые слышишь.","2 запаха.","1 вкус или текстура во рту."],client:"При тревожных атаках или перегрузке.",therapist:"Для заземления клиента в начале сессии.",solo:"В транспорте, очереди, в любой момент."},
+  {id:12,cat:"awareness",type:"exercise",title:"Дыхание наблюдателя",time:"5 мин",author:"Джессика Борушок",desc:"Замечать дыхание как точку я-наблюдатель.",steps:["Сядь удобно. Закрой глаза.","Почувствуй как воздух входит и выходит.","Ты дышишь — или дыхание происходит само?","Найди часть себя которая просто наблюдает.","3–4 минуты. Вернись."],client:"5 минут перед сном или после пробуждения.",therapist:"Вводит клиента в позицию я-наблюдатель.",solo:"Ежедневная практика осознанности."},
+  {id:13,cat:"awareness",type:"question",title:"Где ты сейчас?",time:"2 мин",author:"Тимоти Гордон",desc:"Вопрос-якорь для возвращения в настоящий момент.",steps:["Я в прошлом, будущем или настоящем?","Если не здесь — заметь без осуждения.","Один осознанный вдох.","Три вещи которые происходят прямо сейчас."],client:"Напоминание три раза в день.",therapist:"Задавай при руминации или тревоге о будущем.",solo:"Мини-медитация в любой момент."},
+  {id:14,cat:"awareness",type:"info",title:"Я-наблюдатель",time:"чтение",author:"Тимоти Гордон",desc:"Я-наблюдатель — часть тебя которая замечает, но не является мыслями.",steps:["Ты замечаешь страх — ты не равен(на) страху.","Ты замечаешь злость — ты больше этой злости.","Эта точка была в 5 лет, и сейчас.","Кто наблюдает прямо сейчас, читая это?"],client:"Перечитай когда кажется что ты стал(а) своей тревогой.",therapist:"Объясни до упражнений на наблюдение.",solo:"Ключевая идея АКТ."},
+  {id:15,cat:"awareness",type:"exercise",title:"Осознанная еда",time:"10 мин",author:"Джессика Борушок",desc:"Превратить один приём пищи в практику присутствия.",steps:["Выбери один перекус.","Смотри 30 секунд — цвет, форма, текстура.","Понюхай перед едой.","Жуй медленно — 20 раз.","Без телефона."],client:"Хотя бы раз в день — без экрана.",therapist:"Домашнее задание при тревоге.",solo:"Простая точка входа в осознанность."},
+  {id:16,cat:"awareness",type:"exercise",title:"Медленная прогулка",time:"15 мин",author:"Джессика Борушок",desc:"Идти медленнее и замечать каждый шаг.",steps:["Иди в два раза медленнее обычного.","С каждым шагом: пятка, подъём, носок.","Замечай звуки, воздух, температуру.","Если ум уходит — мягко к ощущению шагов."],client:"Замени один автопилотный поход.",therapist:"Для клиентов с хронической тревогой.",solo:"Вместо проверки телефона в перерыве."},
+  {id:17,cat:"awareness",type:"exercise",title:"Три момента за день",time:"ежедневно",author:"Тимоти Гордон",desc:"Останавливаться трижды в день и замечать что внутри.",steps:["Утром, в середине дня, вечером — ставь будильник.","Три вдоха.","Что я чувствую? Что думаю? Что в теле?","Запиши одно слово для каждого момента."],client:"Простейший способ начать практику осознанности.",therapist:"Домашнее задание на неделю.",solo:"После недели заметишь паттерны."},
+  {id:18,cat:"awareness",type:"exercise",title:"Сканирование тела",time:"8 мин",author:"Джессика Борушок",desc:"Медленно пройти вниманием по всему телу сверху вниз.",steps:["Закрой глаза. Начни с макушки.","Медленно вниз: лоб, шея, плечи...","Замечай напряжение, тепло, давление — без оценки.","Дойди до ступней. Три вдоха."],client:"Перед сном для снятия напряжения.",therapist:"При диссоциации и тревоге.",solo:"Классическая практика майндфулнесс."},
+  {id:19,cat:"engagement",type:"question",title:"Что для меня важно?",time:"5 мин",author:"Тимоти Гордон",desc:"Прояснение ценностей — компас несмотря на боль.",steps:["Представь себя через 10 лет — мудрого.","Что этот ты из будущего скажет о важном?","Запиши 3 ценности которые хочешь воплощать сейчас.","Что ты делаешь сегодня в их сторону?"],client:"Возвращайся когда теряешь направление.",therapist:"Используй в начале терапии.",solo:"Запиши три ценности там где видишь каждый день."},
+  {id:20,cat:"engagement",type:"exercise",title:"Маленький шаг сегодня",time:"3 мин",author:"Джессика Борушок",desc:"Одно конкретное действие в сторону ценностей.",steps:["Выбери одну ценность.","Самое маленькое действие — то что можно сделать сегодня.","Запиши: Сегодня я сделаю ___ потому что важно ___.","Сделай. Даже если тревожно."],client:"Запиши намерение прямо сейчас.",therapist:"Микрозадание между сессиями.",solo:"Один маленький шаг каждый день."},
+  {id:21,cat:"engagement",type:"question",title:"Ради чего я это терплю?",time:"5 мин",author:"Тимоти Гордон",desc:"Боль говорит о том, что нам важно.",steps:["Назови то, что причиняет боль сейчас.","Если бы это не волновало — значит неважно что-то?","Найди ценность за болью.","Мне больно потому что для меня важно ___."],client:"Помогает найти смысл в трудном.",therapist:"Для работы с горем. Используй осторожно.",solo:"Медленно. Возможно со слезами — это нормально."},
+  {id:22,cat:"engagement",type:"exercise",title:"Письмо своим ценностям",time:"10 мин",author:"Джессика Борушок",desc:"Письмо себе от имени человека живущего в ценностях.",steps:["Представь себя через год — живёшь как хочешь.","Напиши письмо сегодняшнему себе.","Начни: Дорогой(ая) [имя], хочу тебе сказать...","Перечитай. Что откликается?"],client:"Попробуй когда есть 15 спокойных минут.",therapist:"Домашнее задание после прояснения ценностей.",solo:"Раз в месяц как дневник движения к себе."},
+  {id:23,cat:"engagement",type:"info",title:"Жизнь — это делание",time:"чтение",author:"Тимоти Гордон",desc:"Ценности — не цели. Это направление в котором идут.",steps:["Цель: быть хорошим родителем — можно достичь или провалить.","Ценность: идти в сторону заботы — всегда возможно.","Даже в боли — маленький шаг в сторону ценности возможен.","Что ты делаешь прямо сейчас — это движется к важному?"],client:"Перечитай когда кажется что пока не время.",therapist:"Объясни разницу ценности и цели.",solo:"Жизнь в ценностях начинается сейчас."},
+  {id:24,cat:"engagement",type:"exercise",title:"Барьеры на пути",time:"7 мин",author:"Джессика Борушок",desc:"Исследовать что мешает жить в ценностях.",steps:["Запиши ценность которую хочешь воплощать.","Запиши все барьеры: мысли, чувства, обстоятельства.","Это факт или история? Это постоянно?","Могу ли я сделать шаг к ценности, неся этот барьер с собой?"],client:"Барьеры не исчезают — но перестают быть непреодолимыми.",therapist:"Связывает принятие и действие.",solo:"Честная и глубокая практика."},
+  {id:25,cat:"engagement",type:"exercise",title:"Колесо ценностей",time:"10 мин",author:"Тимоти Гордон",desc:"Оценить насколько ты живёшь в соответствии с ценностями.",steps:["Выпиши 8 важных сфер жизни.","Оцени каждую от 1 до 10.","Где самые низкие оценки?","Выбери одну сферу и придумай один шаг."],client:"Делай раз в месяц как чек-ап.",therapist:"Хорошая точка входа в тему ценностей.",solo:"Честный взгляд на свою жизнь."}
+];
+
+const catDesc={openness:"Замечать трудные мысли и чувства — и опираться на них, не убегая.",awareness:"Укрепить связь с настоящим моментом. Работать осознанно каждый день.",engagement:"Жизнь — это делание. Делать больше вне зависимости от боли."};
+const typeLabel={exercise:"упражнение",info:"информация",question:"вопрос"};
+let selTags=new Set(),currentWho="client",currentACTCat="openness",currentDeck="emo",roomCode="",cardIndex=0;
+
+function seededRandom(seed,index){
+  let h=0;
+  const str=seed.toString()+":"+index.toString();
+  for(let i=0;i<str.length;i++){h=Math.imul(31,h)+str.charCodeAt(i)|0;}
+  h=h>>>0;
+  return (h%1000000)/1000000;
+}
+
+function go(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo(0,0);
+}
+
+function goNav(id,el){
+  document.querySelectorAll(".nav-tab").forEach(t=>t.classList.remove("active"));
+  el.classList.add("active");
+  go(id);
+}
+
+function selectWho(w,el){
+  currentWho=w;
+  document.querySelectorAll(".who-card").forEach(c=>c.classList.remove("sel"));
+  el.classList.add("sel");
+  const btn=document.getElementById("onboard-btn");
+  btn.disabled=false;
+  btn.style.opacity="1";
+}
+
+function finishOnboard(){
+  const labels={client:"✅ Работаю с психологом",therapist:"🧭 Я психолог",solo:"🙋 Работаю сам(а)"};
+  document.getElementById("role-pill").textContent=labels[currentWho]+" · изменить";
+  go("home");
+}
+
+
+
+function toggleTag(el,tag){
+  if(selTags.has(tag)){selTags.delete(tag);el.classList.remove("sel");}
+  else{selTags.add(tag);el.classList.add("sel");}
+}
+
+function selectDeck(d){
+  currentDeck=d;
+  ["emo","act","both"].forEach(id=>document.getElementById("deck-"+id).classList.remove("selected"));
+  document.getElementById("deck-"+d).classList.add("selected");
+}
+
+function findEmotions(){
+  if(!selTags.size)return;
+  const sc={};
+  EMOTIONS.forEach(e=>sc[e.name]=0);
+  selTags.forEach(t=>(bodyMap[t]||[]).forEach(n=>sc[n]++));
+  const sorted=EMOTIONS.filter(e=>sc[e.name]>0).sort((a,b)=>sc[b.name]-sc[a.name]).slice(0,8);
+  const c=document.getElementById("em-chips");
+  c.innerHTML="";
+  sorted.forEach(e=>{
+    const d=document.createElement("div");
+    d.className="emchip";
+    d.textContent=e.name;
+    d.onclick=()=>{showEmoCard(e);go("em-card");};
+    c.appendChild(d);
+  });
+  go("em-suggest");
+}
+
+function showEmoCard(e){
+  document.getElementById("em-card-c").innerHTML=`<div class="cbar bar-p"></div><span class="cpill pp">${e.cat}</span><div class="cname">${e.name}</div><div class="cdef">${e.def}</div><p class="ql">Вопросы для рефлексии</p>${e.questions.map((q,i)=>`<div class="qi"><div class="qn qnp">${i+1}</div><div class="qt">${q}</div></div>`).join("")}`;
+  const hint={client:e.client,therapist:e.therapist,solo:e.solo}[currentWho]||e.client;
+  const hl={client:"Для тебя",therapist:"Психологу",solo:"Самостоятельно"}[currentWho];
+  document.getElementById("em-role-box").innerHTML=`<div class="rb-l">${hl}</div><div class="rb-t">${hint}</div>`;
+}
+
+function drawEmo(){
+  const e=EMOTIONS[Math.floor(Math.random()*EMOTIONS.length)];
+  showEmoCard(e);go("em-card");
+}
+
+function filterACT(cat,el){
+  currentACTCat=cat;
+  document.querySelectorAll(".ctab").forEach(t=>t.classList.remove("active"));
+  el.classList.add("active");
+  document.getElementById("act-desc").textContent=catDesc[cat];
+  renderACT();
+}
+
+function renderACT(){
+  const f=ACT.filter(c=>c.cat===currentACTCat);
+  document.getElementById("act-grid").innerHTML=f.map(c=>`<div class="amini" onclick="showACTCard(${c.id})"><div class="am-time">${c.time}</div><div class="am-title">${c.title}</div><span class="tpill t${c.type==="exercise"?"ex":c.type==="info"?"info":"q"}">${typeLabel[c.type]}</span></div>`).join("");
+}
+
+function showACTCard(id){
+  const c=ACT.find(x=>x.id===id);if(!c)return;
+  const bar={openness:"bar-t",awareness:"bar-b",engagement:"bar-v"}[c.cat];
+  const pill={openness:"op",awareness:"ap",engagement:"ep"}[c.cat];
+  const cat={openness:"Открытость",awareness:"Осознанность",engagement:"Вовлечённость"}[c.cat];
+  const qn={openness:"qnt",awareness:"qnb",engagement:"qnp"}[c.cat];
+  document.getElementById("act-card-c").innerHTML=`<div class="cbar ${bar}"></div><span class="cpill ${pill}">${cat} · ${typeLabel[c.type]}</span><div class="cname">${c.title}</div><div class="cauthor">Метод: ${c.author}</div><div class="cdef">${c.desc}</div><p class="ql">Шаги практики</p>${c.steps.map((s,i)=>`<div class="qi"><div class="qn ${qn}">${i+1}</div><div class="qt">${s}</div></div>`).join("")}`;
+  const hint={client:c.client,therapist:c.therapist,solo:c.solo}[currentWho];
+  const hl={client:"Для тебя",therapist:"Психологу",solo:"Самостоятельно"}[currentWho];
+  document.getElementById("act-role-box").innerHTML=`<div class="rb-l">${hl}</div><div class="rb-t">${hint}</div>`;
+  go("act-card");
+}
+
+function drawACT(){
+  const c=ACT[Math.floor(Math.random()*ACT.length)];
+  showACTCard(c.id);go("act-card");
+}
+
+function createRoom(){
+  roomCode=Math.floor(1000+Math.random()*9000).toString();
+  document.getElementById("room-area").innerHTML=`<div class="link-box"><div><div style="font-size:11px;color:var(--text3);margin-bottom:4px">Код комнаты</div><div class="link-url" style="font-size:28px;letter-spacing:.2em;font-weight:700;font-family:'Lora',serif">${roomCode}</div></div><button class="btn teal" onclick="startGroup('host')">Начать игру →</button></div><p style="font-size:12px;color:var(--text2);margin-top:.5rem">Поделись кодом с участниками — они вводят его при входе.</p>`;
+}
+
+function joinRoom(){
+  const code=prompt("Введи код комнаты:");
+  if(code){roomCode=code;startGroup("participant");}
+}
+
+function startGroup(role){
+  document.getElementById("gp-role-badge").textContent=role==="host"?"👑 Ведущий":"👤 Участник";
+  document.getElementById("gp-role-badge").className=role==="host"?"rb-host":"rb-part";
+  document.getElementById("gp-room-label").textContent="Комната #"+roomCode;
+  cardIndex=0;
+  groupNext();go("group-play");
+}
+
+function groupNext(){
+  const rnd1=seededRandom(roomCode, cardIndex*3);
+  const rnd2=seededRandom(roomCode, cardIndex*3+1);
+  const rnd3=seededRandom(roomCode, cardIndex*3+2);
+  cardIndex++;
+
+  let card,isEmo=false;
+  if(currentDeck==="emo"||(currentDeck==="both"&&rnd1>0.5)){
+    card=EMOTIONS[Math.floor(rnd2*EMOTIONS.length)];isEmo=true;
+  }else{
+    card=ACT[Math.floor(rnd2*ACT.length)];
+  }
+  if(isEmo){
+    document.getElementById("gp-card-wrap").innerHTML=`<div class="card"><div class="cbar bar-p"></div><span class="cpill pp">${card.cat} · Эмоция</span><div class="cname">${card.name}</div><div class="cdef">${card.def}</div><p class="ql">Вопросы</p>${card.questions.map((q,i)=>`<div class="qi"><div class="qn qnp">${i+1}</div><div class="qt">${q}</div></div>`).join("")}</div>`;
+  }else{
+    const bar={openness:"bar-t",awareness:"bar-b",engagement:"bar-v"}[card.cat];
+    const pill={openness:"op",awareness:"ap",engagement:"ep"}[card.cat];
+    const cat={openness:"Открытость",awareness:"Осознанность",engagement:"Вовлечённость"}[card.cat];
+    document.getElementById("gp-card-wrap").innerHTML=`<div class="card"><div class="cbar ${bar}"></div><span class="cpill ${pill}">${cat} · АКТ</span><div class="cname">${card.title}</div><div class="cdef">${card.desc}</div><p class="ql">Практика</p>${card.steps.map((s,i)=>`<div class="qi"><div class="qn qnt">${i+1}</div><div class="qt">${s}</div></div>`).join("")}</div>`;
+  }
+}
+
+document.addEventListener("DOMContentLoaded",()=>renderACT());
+</script>
+</body>
+</html>
